@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleFilmyILudzie.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona Główna</a></li>
+                <li><a href="filmy.html">Filmy</a></li>
+                <li><a href="seriale.html">Seriale</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="login.html">Zaloguj się</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="info">
+        <div class="container">
+            <h1>Imie i nazwisko aktora/reżysera: </h1>
+            <div class="Detale">
+                <img src="rezyser.jpg" alt="aktor/rezyser">
+                <div class="details">
+                    <p><b>Ocena: </b><!--tutaj nwm czy sam tekst czy wizulnie z gwiazdkami np--></p>
+                    <form action="" method="post">
+                        <div class="status">
+                            <p><b>Dodaj do ulubionych</b></p>
+                            <label>
+                                <input type="checkbox" name="ulubiony" value="tak">
+                                <img src="serce_szare.png" alt="Ulubiony film" class="serce"> <!--Tutaj myślałem na zasadize checked/unchecked i to sie w stylach zrobilo by może graficznie jak jakies serduszko
+                                gdzie jak jest unchecked to jest szare, jak checked to zamienia sie na różowe i przy okazji robi sie różowe -->
+                            </label>
+                        </div>
+                        <button type="submit" class="wyslij">Zapisz status</button>
+                    </form>
+                    <br>
+
+                    <P><b>Ranking popularności: </b></P>
+                    <p><b>Życiorys:</b> jakis tam Życiorys</p>
+                    <br>
+                    <p><b>opinie:</b></p>
+                    <p>jakas tam opinia</p>
+
+                    <br>
+                    <p><b>Występował/a w:</b></p>
+                    <div class="ListaFilmów">
+                        <a href="film_info.php?id=1">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=2">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=3">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=4">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=5">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=6">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Nazwa firmy czy cos</p>
+    </footer>
+</body>
+</html>
