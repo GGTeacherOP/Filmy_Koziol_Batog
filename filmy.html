@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona Główna </a></li>
+                <li><a href="filmy.html">Filmy</a></li>
+                <li><a href="seriale.html">Seriale</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="login.html">Zaloguj się</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <table class="toplist">
+            <tr>
+                <th class="toplist1">Num</th>
+                <th class="toplist2">Zdj</th>
+                <th class="toplist3">Nazwa</th>
+                <th class="toplist4">Ocena</th>
+                <th class="toplist5">Reż.</th>
+            </tr>
+        <script>
+            for(i=1;i<=100;i++){
+                document.write("<tr><td>"+i+".</td><td><img src=''></td><td>Film</td><td>3.5*</td><td><a href='aktor_i_reżyser_info.php?id="+i+"'>Reżyser</a></td></tr>")
+            }
+        </script>
+        </table>
+    </section>
+</body>
+</html>

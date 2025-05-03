@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header nav ul li a:hover {
+    color: #f4f4f4;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+main {
+    padding: 40px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 40px;
+    clear:both;
+}
+
+main div {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+main img {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+main h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+main p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+main a {
+    color: #333;
+}
+
+main a:hover {
+    color: #444;
+}
+.Detale {
+    margin-left:5%;
+    margin-right:5%;
+    width:20%;
+    float:left;
+}
+.details {
+    float:left;
+    width:70%;
+}
+.ListaFilmów {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.kartaFilmu {
+    width: 200px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.kartaFilmu img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.kartaFilmu h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.status {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.status label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.status input[type="checkbox"] {
+    display: none;  /* tu jakoś żeby tylko serduszko było klikalne */
+}
+
+.serce {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.serce.checked {
+    content: url('serce_czerwone.png');  /* Zmieniony obrazek po zaznaczeniu */
+}
+
+.wyslij {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.wyslij:hover {
+    background-color: #444;
+}
+
+footer {
+    font-size: 16px;
+    position:fixed;
+    width:100%;
+    bottom:0;
+}

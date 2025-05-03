@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleFilmyILudzie.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona Główna</a></li>
+                <li><a href="filmy.html">Filmy</a></li>
+                <li><a href="seriale.html">Seriale</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="login.html">Zaloguj się</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="info">
+        <div class="container">
+            <div class="Detale">
+                <h1>Tytuł filmu: </h1>
+                <img src="film.jpg" alt="film">
+                </div>
+                <div class="details">
+                    <P><b>Ranking popularności: </b></P>
+                    <p><b>Gatunek:</b></p>
+                    <p><b>Reżyser:</b> <a href="aktor_i_reżyser_info.html"></a></p>
+                    <p><b>Obsada:</b>
+                    <p><b>Opis:</b> jakis tam opis filmu</p>
+                    <p><b>Ocena: </b><!--tutaj nwm czy sam tekst czy wizulnie z gwiazdkami np--></p>
+                    <form action="" method="post">
+                        <div class="status">
+                            <p><b>Wybierz status filmu:</b></p>
+                            <select name="status" id="status">
+                                <option value="nie_obejrzany">Nie obejrzany</option>
+                                <option value="obejrzany">Obejrzany</option>
+                                <option value="porzucony">Porzucony</option>
+                                <option value="planowany">Planowany do obejrzenia</option>
+                            </select>
+                            <p><b>Dodaj do ulubionych</b></p>
+                            <label>
+                                <input type="checkbox" name="ulubiony" value="tak">
+                                <img src="serce_szare.png" alt="Ulubiony film" class="serce"> <!--Tutaj myślałem na zasadize checked/unchecked i to sie w stylach zrobilo by może graficznie jak jakies serduszko
+                                gdzie jak jest unchecked to jest szare, jak checked to zamienia sie na różowe i przy okazji robi sie różowe -->
+                            </label>
+                        </div>
+                        <button type="submit" class="wyslij">Zapisz status</button>
+                    </form>
+                    <br>
+                    </p>
+
+                    <br>
+                    <p><b>Recenzje:</b></p>
+                    <p>jakas tam recenzja</p>
+
+                    <br>
+                    <p><b>Podobne filmy i seriale:</b></p>
+                    <div class="ListaFilmów">
+                        <a href="film_info.php?id=1">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=2">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=3">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=4">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=5">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                        <a href="film_info.php?id=6">
+                            <div class="kartaFilmu">
+                                <img src="film.jpg" alt="Film">
+                                <h3>Film</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Nazwa firmy czy cos</p>
+    </footer>
+</body>
+</html>
