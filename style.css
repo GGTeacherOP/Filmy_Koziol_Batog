@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header nav ul li a:hover {
+    color: #f4f4f4;
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.szukaj {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.szukaj input {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.szukaj button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.szukaj button:hover {
+    background-color: #444;
+}
+
+section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.polecaneFilmy h2,
+.sekcjaNiespodzianek h2,
+.popularniAktorzy h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.ListaFilmów {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.kartaFilmu {
+    width: 200px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.kartaFilmu img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.kartaFilmu h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.kartaAkotrówIRezyserow {
+    width: 200px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.kartaAkotrówIRezyserow img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.kartaAkotrówIRezyserow h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.informacjeKontaktowe p {
+    text-align: center;
+    margin: 5px;
+}
+
+
+.socialMedia a{
+    margin-right: 15px;
+    font-size: larger;
+    margin-left: 15px;
+}
+
+.socialMedia a:hover{
+    background-color: #444;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 40px;
+}
+
+
