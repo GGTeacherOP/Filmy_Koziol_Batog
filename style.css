@@ -33,6 +33,7 @@ header nav ul li a {
 
 header nav ul li a:hover {
     color: #f4f4f4;
+    text-decoration: underline;
 }
 
 a {
@@ -119,6 +120,23 @@ section {
 .kartaAkotrówIRezyserow h3 {
     margin-top: 10px;
     font-size: 18px;
+}
+
+.informacjeKontaktowe p {
+    text-align: center;
+    margin: 5px;
+}
+
+
+.socialMedia a{
+    margin-right: 15px;
+    font-size: larger;
+    margin-left: 15px;
+}
+
+.socialMedia a:hover{
+    background-color: #444;
+    color: white;
 }
 
 footer {
