@@ -520,6 +520,138 @@ INSERT INTO `uzytkownicy` (`ID`, `login`, `haslo`, `rola`, `email`) VALUES
 -- --------------------------------------------------------
 
 --
+
+-- Struktura tabeli dla tabeli `wystapienia`
+--
+
+CREATE TABLE `wystapienia` (
+  `id` int(11) NOT NULL,
+  `id_filmu` int(11) NOT NULL,
+  `id_aktora` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `wystapienia`
+--
+
+INSERT INTO `wystapienia` (`id`, `id_filmu`, `id_aktora`) VALUES
+(1, 1, 15),
+(2, 2, 6),
+(3, 2, 9),
+(4, 3, 2),
+(5, 3, 14),
+(6, 3, 19),
+(55, 4, 60),
+(8, 5, 73),
+(9, 6, 3),
+(56, 7, 77),
+(11, 8, 11),
+(10, 8, 12),
+(12, 8, 66),
+(57, 9, 29),
+(13, 10, 39),
+(58, 11, 70),
+(59, 12, 4),
+(60, 13, 7),
+(14, 14, 27),
+(61, 15, 63),
+(62, 16, 67),
+(63, 17, 18),
+(64, 18, 79),
+(65, 19, 32),
+(16, 20, 51),
+(15, 20, 65),
+(17, 21, 43),
+(19, 22, 30),
+(18, 22, 73),
+(20, 23, 5),
+(21, 23, 10),
+(22, 24, 19),
+(66, 25, 68),
+(24, 26, 1),
+(23, 26, 80),
+(26, 27, 24),
+(25, 27, 47),
+(27, 28, 35),
+(67, 29, 76),
+(28, 30, 3),
+(68, 31, 40),
+(69, 32, 59),
+(70, 33, 33),
+(71, 34, 13),
+(72, 35, 31),
+(73, 36, 75),
+(74, 37, 53),
+(75, 38, 20),
+(76, 39, 48),
+(77, 40, 25),
+(78, 41, 16),
+(29, 42, 10),
+(79, 43, 26),
+(80, 44, 57),
+(81, 45, 22),
+(82, 46, 36),
+(83, 47, 46),
+(84, 48, 54),
+(85, 49, 28),
+(86, 50, 58),
+(87, 51, 41),
+(88, 52, 72),
+(89, 53, 38),
+(30, 54, 37),
+(90, 55, 50),
+(31, 56, 1),
+(32, 56, 2),
+(33, 56, 66),
+(34, 57, 39),
+(35, 58, 9),
+(36, 59, 21),
+(91, 60, 44),
+(38, 61, 8),
+(37, 61, 9),
+(39, 62, 66),
+(92, 63, 23),
+(93, 64, 6),
+(94, 65, 42),
+(40, 66, 17),
+(41, 66, 24),
+(42, 67, 10),
+(43, 67, 24),
+(95, 68, 8),
+(96, 69, 34),
+(97, 70, 19),
+(98, 71, 10),
+(44, 72, 64),
+(99, 73, 73),
+(100, 74, 52),
+(101, 75, 45),
+(102, 76, 62),
+(103, 77, 69),
+(104, 78, 49),
+(105, 79, 55),
+(106, 80, 11),
+(107, 81, 47),
+(108, 82, 17),
+(109, 83, 15),
+(110, 84, 9),
+(111, 85, 56),
+(45, 86, 64),
+(112, 87, 21),
+(46, 88, 61),
+(47, 89, 71),
+(48, 90, 78),
+(113, 91, 5),
+(114, 92, 74),
+(49, 93, 17),
+(115, 94, 51),
+(51, 95, 3),
+(50, 95, 10),
+(52, 95, 32),
+(53, 96, 10),
+(116, 97, 27),
+(117, 98, 4),
+(118, 99, 3),
+(54, 100, 8);
 -- Zastąpiona struktura widoku `wszyscy_uzytkownicy`
 -- (See below for the actual view)
 --
@@ -647,6 +779,16 @@ ALTER TABLE `uzytkownicy`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+
+-- Indeksy dla tabeli `wystapienia`
+--
+ALTER TABLE `wystapienia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_filmu` (`id_filmu`,`id_aktora`),
+  ADD KEY `id_aktora` (`id_aktora`);
+
+--
+
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -693,6 +835,12 @@ ALTER TABLE `uzytkownicy`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
+-- AUTO_INCREMENT for table `wystapienia`
+--
+ALTER TABLE `wystapienia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -721,6 +869,13 @@ ALTER TABLE `personel`
 ALTER TABLE `statusy_filmow`
   ADD CONSTRAINT `statusy_filmow_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `filmy` (`ID`),
   ADD CONSTRAINT `statusy_filmow_ibfk_2` FOREIGN KEY (`uzytkownik_id`) REFERENCES `uzytkownicy` (`ID`);
+
+--
+-- Constraints for table `wystapienia`
+--
+ALTER TABLE `wystapienia`
+  ADD CONSTRAINT `wystapienia_ibfk_1` FOREIGN KEY (`id_aktora`) REFERENCES `aktorzy` (`ID`),
+  ADD CONSTRAINT `wystapienia_ibfk_2` FOREIGN KEY (`id_filmu`) REFERENCES `filmy` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
