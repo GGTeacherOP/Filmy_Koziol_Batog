@@ -26,6 +26,9 @@ h4 {
     margin-left:10px;
     float:left;
 }
+div a, h4 a {
+    float:left;
+}
 .row1{
     height:40px;
     width:100%;
@@ -33,6 +36,12 @@ h4 {
 .row2 {
     width:200px;
     float:left;
+}
+.row3 {
+    margin-top:15px;
+}
+.row4{
+
 }
 .rezyser {
     text-align: left;
@@ -92,4 +101,47 @@ h5 {
 .opis-tekst {
     padding:15px;
     transform:translateY(-15px)
+}
+.aktor {
+    width:150px;
+    height:220px;
+    background-color: #444;
+    float:left;
+    margin-left:25px;
+    border-radius:30px;
+}
+.aktor a img {
+    width:150px;
+    height:160px;
+    border-top-left-radius: 30px;
+    border-top-right-radius:30px;
+}
+.aktor a p {
+    margin-left:20px;
+    font-size: large;
+    font-weight: bold;
+    transform:translateY(5px)
+}
+.recenzja {
+    background-color: #444;
+    border-radius: 30px;
+    width:370px;
+    height:170px;
+    padding:15px;
+    margin:20px;
+    float:left;
+}
+.recenzja p {
+    margin:0;
+}
+.konto {
+    font-weight: bold;
+}
+.opinia {
+    padding-top:5px;
+    line-height: 20px;
+    max-width: 370px;;
+}
+.imie {
+    margin-right:90%;
 }
