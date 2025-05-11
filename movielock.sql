@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 11, 2025 at 12:32 AM
--- Wersja serwera: 10.4.28-MariaDB
--- Wersja PHP: 8.2.4
+-- Generation Time: Maj 11, 2025 at 06:41 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -262,6 +262,18 @@ CREATE TABLE `oceny` (
 -- --------------------------------------------------------
 
 --
+-- Zastąpiona struktura widoku `oceny_uzytkownikow`
+-- (See below for the actual view)
+--
+CREATE TABLE `oceny_uzytkownikow` (
+`login` varchar(255)
+,`tytul` varchar(255)
+,`ocena` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `osoby`
 --
 
@@ -396,6 +408,64 @@ CREATE TABLE `statusy_filmow` (
 -- --------------------------------------------------------
 
 --
+-- Zastąpiona struktura widoku `top_aktorzy`
+-- (See below for the actual view)
+--
+CREATE TABLE `top_aktorzy` (
+`ranking_popularnosci` int(11)
+,`imie_nazwisko` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `top_ocena`
+-- (See below for the actual view)
+--
+CREATE TABLE `top_ocena` (
+`zdjecie` varchar(255)
+,`tytul` varchar(255)
+,`srednia_ocena` decimal(3,2)
+,`imie_nazwisko` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `top_popularnosc`
+-- (See below for the actual view)
+--
+CREATE TABLE `top_popularnosc` (
+`zdjecie` varchar(255)
+,`tytul` varchar(255)
+,`imie_nazwisko` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `top_rezyserzy`
+-- (See below for the actual view)
+--
+CREATE TABLE `top_rezyserzy` (
+`ranking_popularnosci` int(11)
+,`imie_nazwisko` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `ulubione_filmy`
+-- (See below for the actual view)
+--
+CREATE TABLE `ulubione_filmy` (
+`login` varchar(255)
+,`tytul` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `uzytkownicy`
 --
 
@@ -446,6 +516,81 @@ INSERT INTO `uzytkownicy` (`ID`, `login`, `haslo`, `rola`, `email`) VALUES
 (32, 'moderator2', 'haslo7777', 'moderator', 'moderator2@x.pl'),
 (33, 'moderator3', 'haslo8888', 'moderator', 'moderator3@x.pl'),
 (34, 'admin', 'haslo9999', 'admin', 'admin@x.pl');
+
+-- --------------------------------------------------------
+
+--
+-- Zastąpiona struktura widoku `wszyscy_uzytkownicy`
+-- (See below for the actual view)
+--
+CREATE TABLE `wszyscy_uzytkownicy` (
+`ID` int(11)
+,`login` varchar(255)
+,`email` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `oceny_uzytkownikow`
+--
+DROP TABLE IF EXISTS `oceny_uzytkownikow`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `oceny_uzytkownikow`  AS SELECT `uzytkownicy`.`login` AS `login`, `filmy`.`tytul` AS `tytul`, `oceny`.`ocena` AS `ocena` FROM ((`oceny` join `uzytkownicy` on(`oceny`.`uzytkownik_id` = `uzytkownicy`.`ID`)) join `filmy` on(`oceny`.`film_id` = `filmy`.`ID`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `top_aktorzy`
+--
+DROP TABLE IF EXISTS `top_aktorzy`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `top_ocena`
+--
+DROP TABLE IF EXISTS `top_ocena`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_ocena`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`srednia_ocena` AS `srednia_ocena`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `osoby` on(`filmy`.`rezyser_id` = `osoby`.`ID`)) ORDER BY `filmy`.`srednia_ocena` DESC LIMIT 0, 100 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `top_popularnosc`
+--
+DROP TABLE IF EXISTS `top_popularnosc`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_popularnosc`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `osoby` on(`filmy`.`rezyser_id` = `osoby`.`ID`)) ORDER BY `filmy`.`ranking_popularnosci` DESC LIMIT 0, 100 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `top_rezyserzy`
+--
+DROP TABLE IF EXISTS `top_rezyserzy`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_rezyserzy`  AS SELECT `osoby`.`ranking_popularnosci` AS `ranking_popularnosci`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM `osoby` ORDER BY `osoby`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `ulubione_filmy`
+--
+DROP TABLE IF EXISTS `ulubione_filmy`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ulubione_filmy`  AS SELECT `uzytkownicy`.`login` AS `login`, `filmy`.`tytul` AS `tytul` FROM ((`statusy_filmow` join `uzytkownicy` on(`statusy_filmow`.`uzytkownik_id` = `uzytkownicy`.`ID`)) join `filmy` on(`statusy_filmow`.`film_id` = `filmy`.`ID`)) WHERE `statusy_filmow`.`ulubione` = 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura widoku `wszyscy_uzytkownicy`
+--
+DROP TABLE IF EXISTS `wszyscy_uzytkownicy`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `wszyscy_uzytkownicy`  AS SELECT `uzytkownicy`.`ID` AS `ID`, `uzytkownicy`.`login` AS `login`, `uzytkownicy`.`email` AS `email` FROM `uzytkownicy` WHERE `uzytkownicy`.`rola` = 'uzytkownik' ;
 
 --
 -- Indeksy dla zrzutów tabel

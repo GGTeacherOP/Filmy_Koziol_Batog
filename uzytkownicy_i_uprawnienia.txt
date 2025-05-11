@@ -1,0 +1,478 @@
+# Uprawnienia dla `admin`@`%`
+
+GRANT USAGE ON *.* TO `admin`@`%` IDENTIFIED BY PASSWORD '*30981F5B00C54C64EBB30DBB1225DA797066EF46';
+
+GRANT ALL PRIVILEGES ON `movielock`.* TO `admin`@`%` WITH GRANT OPTION;
+
+
+# Uprawnienia dla `adrian_user25`@`%`
+
+GRANT USAGE ON *.* TO `adrian_user25`@`%` IDENTIFIED BY PASSWORD '*C01AD223133338C25FC9102B4BC89C793BBAD462';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `adrian_user25`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `adrian_user25`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `adrian_user25`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `adrian_user25`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `adrian_user25`@`%`;
+
+
+# Uprawnienia dla `agnieszka_user12`@`%`
+
+GRANT USAGE ON *.* TO `agnieszka_user12`@`%` IDENTIFIED BY PASSWORD '*B60C0E891683D5CD721DECE82EF278F354944D4C';
+
+GRANT SELECT ON `movielock`.`osoby` TO `agnieszka_user12`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `agnieszka_user12`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `agnieszka_user12`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `agnieszka_user12`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `agnieszka_user12`@`%`;
+
+
+# Uprawnienia dla `aleksandra_user18`@`%`
+
+GRANT USAGE ON *.* TO `aleksandra_user18`@`%` IDENTIFIED BY PASSWORD '*45AF850CE54259A77A86EE26AF1FC3335522AB57';
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `aleksandra_user18`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `aleksandra_user18`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `aleksandra_user18`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `aleksandra_user18`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `aleksandra_user18`@`%`;
+
+
+# Uprawnienia dla `ania_user2`@`%`
+
+GRANT USAGE ON *.* TO `ania_user2`@`%` IDENTIFIED BY PASSWORD '*2F412541A49896B16EF4FCFC99561E3E40BAC5B1';
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `ania_user2`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `ania_user2`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `ania_user2`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `ania_user2`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `ania_user2`@`%`;
+
+
+# Uprawnienia dla `bartek_user11`@`%`
+
+GRANT USAGE ON *.* TO `bartek_user11`@`%` IDENTIFIED BY PASSWORD '*EF22D71EBBB58A8BB60D28C06DC174BB6043288B';
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `bartek_user11`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `bartek_user11`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `bartek_user11`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `bartek_user11`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `bartek_user11`@`%`;
+
+
+# Uprawnienia dla `basia_user16`@`%`
+
+GRANT USAGE ON *.* TO `basia_user16`@`%` IDENTIFIED BY PASSWORD '*5353A3CBD316F9919CB29D1A8118A98FAFAA7BF7';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `basia_user16`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `basia_user16`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `basia_user16`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `basia_user16`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `basia_user16`@`%`;
+
+
+# Uprawnienia dla `dawid_user13`@`%`
+
+GRANT USAGE ON *.* TO `dawid_user13`@`%` IDENTIFIED BY PASSWORD '*1A5F0919C2C33529DBEE2E43952391F191464132';
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `dawid_user13`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `dawid_user13`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `dawid_user13`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `dawid_user13`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `dawid_user13`@`%`;
+
+
+# Uprawnienia dla `edytor1`@`%`
+
+GRANT USAGE ON *.* TO `edytor1`@`%` IDENTIFIED BY PASSWORD '*7F68940C0C237AD219E3EBE9ED78456E9B8AE576';
+
+GRANT SELECT ON `movielock`.`oceny` TO `edytor1`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`osoby` TO `edytor1`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`aktorzy` TO `edytor1`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`filmy` TO `edytor1`@`%`;
+
+
+# Uprawnienia dla `edytor2`@`%`
+
+GRANT USAGE ON *.* TO `edytor2`@`%` IDENTIFIED BY PASSWORD '*725D228B525B8A127D10C0A78E728334ECA5A3F8';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`osoby` TO `edytor2`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`aktorzy` TO `edytor2`@`%`;
+
+GRANT SELECT ON `movielock`.`oceny` TO `edytor2`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`filmy` TO `edytor2`@`%`;
+
+
+# Uprawnienia dla `edytor3`@`%`
+
+GRANT USAGE ON *.* TO `edytor3`@`%` IDENTIFIED BY PASSWORD '*0219EA19B536078FB5F47EC5B6886EF49854CCBC';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`filmy` TO `edytor3`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`aktorzy` TO `edytor3`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`osoby` TO `edytor3`@`%`;
+
+GRANT SELECT ON `movielock`.`oceny` TO `edytor3`@`%`;
+
+
+# Uprawnienia dla `edytor4`@`%`
+
+GRANT USAGE ON *.* TO `edytor4`@`%` IDENTIFIED BY PASSWORD '*73B48F35B8D49BA996238A7972EAC9076D28D49F';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`filmy` TO `edytor4`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`aktorzy` TO `edytor4`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`osoby` TO `edytor4`@`%`;
+
+GRANT SELECT ON `movielock`.`oceny` TO `edytor4`@`%`;
+
+
+# Uprawnienia dla `edytor5`@`%`
+
+GRANT USAGE ON *.* TO `edytor5`@`%` IDENTIFIED BY PASSWORD '*60FDA41BB412652B5E4AE89038AAE1A62764F313';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`osoby` TO `edytor5`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`aktorzy` TO `edytor5`@`%`;
+
+GRANT SELECT ON `movielock`.`oceny` TO `edytor5`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`filmy` TO `edytor5`@`%`;
+
+
+# Uprawnienia dla `gosia_user8`@`%`
+
+GRANT USAGE ON *.* TO `gosia_user8`@`%` IDENTIFIED BY PASSWORD '*17DA01ED30DA193C02FDEF08D4FC895071C699C4';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `gosia_user8`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `gosia_user8`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `gosia_user8`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `gosia_user8`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `gosia_user8`@`%`;
+
+
+# Uprawnienia dla `grzegorz_user15`@`%`
+
+GRANT USAGE ON *.* TO `grzegorz_user15`@`%` IDENTIFIED BY PASSWORD '*80290D0862EA00D61CE235F75BADDDE8338321DD';
+
+GRANT SELECT ON `movielock`.`filmy` TO `grzegorz_user15`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `grzegorz_user15`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `grzegorz_user15`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `grzegorz_user15`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `grzegorz_user15`@`%`;
+
+
+# Uprawnienia dla `iza_user14`@`%`
+
+GRANT USAGE ON *.* TO `iza_user14`@`%` IDENTIFIED BY PASSWORD '*6A794E9CB256752B516BACCF3745B33880D03484';
+
+GRANT SELECT ON `movielock`.`filmy` TO `iza_user14`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `iza_user14`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `iza_user14`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `iza_user14`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `iza_user14`@`%`;
+
+
+# Uprawnienia dla `janek_user1`@`%`
+
+GRANT USAGE ON *.* TO `janek_user1`@`%` IDENTIFIED BY PASSWORD '*E94CD105B26E9384202540282C6FF640F4EE7C3F';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `janek_user1`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `janek_user1`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `janek_user1`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `janek_user1`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `janek_user1`@`%`;
+
+
+# Uprawnienia dla `joanna_user20`@`%`
+
+GRANT USAGE ON *.* TO `joanna_user20`@`%` IDENTIFIED BY PASSWORD '*07438A04F6E41AA7AE2A96593301890DB7BB1546';
+
+GRANT SELECT ON `movielock`.`filmy` TO `joanna_user20`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `joanna_user20`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `joanna_user20`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `joanna_user20`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `joanna_user20`@`%`;
+
+
+# Uprawnienia dla `julia_user22`@`%`
+
+GRANT USAGE ON *.* TO `julia_user22`@`%` IDENTIFIED BY PASSWORD '*FDA6535BBAB12C07A19A54F9E3A41F0171CD77A6';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `julia_user22`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `julia_user22`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `julia_user22`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `julia_user22`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `julia_user22`@`%`;
+
+
+# Uprawnienia dla `kasia_user4`@`%`
+
+GRANT USAGE ON *.* TO `kasia_user4`@`%` IDENTIFIED BY PASSWORD '*C0E21A8C49DDB7904A80F7A5F5D42DA5B72BFDE5';
+
+GRANT SELECT ON `movielock`.`osoby` TO `kasia_user4`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `kasia_user4`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `kasia_user4`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `kasia_user4`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `kasia_user4`@`%`;
+
+
+# Uprawnienia dla `krzysiek_user19`@`%`
+
+GRANT USAGE ON *.* TO `krzysiek_user19`@`%` IDENTIFIED BY PASSWORD '*29C96E5EED559F60236441D692B4E7CE6D7CBEDB';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `krzysiek_user19`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `krzysiek_user19`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `krzysiek_user19`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `krzysiek_user19`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `krzysiek_user19`@`%`;
+
+
+# Uprawnienia dla `kuba_user9`@`%`
+
+GRANT USAGE ON *.* TO `kuba_user9`@`%` IDENTIFIED BY PASSWORD '*36253E31170B443C5A96AA54DB40C294F95ECA8E';
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `kuba_user9`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `kuba_user9`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `kuba_user9`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `kuba_user9`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `kuba_user9`@`%`;
+
+
+# Uprawnienia dla `marek_user3`@`%`
+
+GRANT USAGE ON *.* TO `marek_user3`@`%` IDENTIFIED BY PASSWORD '*C758F29B399BA33FF88F6F0EF73F0A9C5829AD83';
+
+GRANT SELECT ON `movielock`.`filmy` TO `marek_user3`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `marek_user3`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `marek_user3`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `marek_user3`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `marek_user3`@`%`;
+
+
+# Uprawnienia dla `michal_user17`@`%`
+
+GRANT USAGE ON *.* TO `michal_user17`@`%` IDENTIFIED BY PASSWORD '*C616E4A72EEE518100D2896393AF8F1524583880';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `michal_user17`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `michal_user17`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `michal_user17`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `michal_user17`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `michal_user17`@`%`;
+
+
+# Uprawnienia dla `moderator1`@`%`
+
+GRANT USAGE ON *.* TO `moderator1`@`%` IDENTIFIED BY PASSWORD '*9E70F522403EB6824EDCB50FC54331DAD8336244';
+
+GRANT SELECT, DELETE ON `movielock`.`uzytkownicy` TO `moderator1`@`%`;
+
+GRANT SELECT, DELETE ON `movielock`.`oceny` TO `moderator1`@`%`;
+
+GRANT SELECT ON `movielock`.`statusy_filmow` TO `moderator1`@`%`;
+
+
+# Uprawnienia dla `moderator2`@`%`
+
+GRANT USAGE ON *.* TO `moderator2`@`%` IDENTIFIED BY PASSWORD '*75F7F68362F342013125F647BA77D983DC8CD8D0';
+
+GRANT SELECT, DELETE ON `movielock`.`oceny` TO `moderator2`@`%`;
+
+GRANT SELECT, DELETE ON `movielock`.`uzytkownicy` TO `moderator2`@`%`;
+
+GRANT SELECT ON `movielock`.`statusy_filmow` TO `moderator2`@`%`;
+
+
+# Uprawnienia dla `moderator3`@`%`
+
+GRANT USAGE ON *.* TO `moderator3`@`%` IDENTIFIED BY PASSWORD '*CB65DB189B462259B39D94925CA7264351CB24CB';
+
+GRANT SELECT, DELETE ON `movielock`.`oceny` TO `moderator3`@`%`;
+
+GRANT SELECT, DELETE ON `movielock`.`uzytkownicy` TO `moderator3`@`%`;
+
+GRANT SELECT ON `movielock`.`statusy_filmow` TO `moderator3`@`%`;
+
+
+# Uprawnienia dla `natalia_user24`@`%`
+
+GRANT USAGE ON *.* TO `natalia_user24`@`%` IDENTIFIED BY PASSWORD '*6C363C72924D3DDF79ED5D0FBBFBC806E4F4A090';
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `natalia_user24`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `natalia_user24`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `natalia_user24`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `natalia_user24`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `natalia_user24`@`%`;
+
+
+# Uprawnienia dla `ola_user6`@`%`
+
+GRANT USAGE ON *.* TO `ola_user6`@`%` IDENTIFIED BY PASSWORD '*5EA1FE1DF4B11FDCF0F016DB9D7CE077310B6705';
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `ola_user6`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `ola_user6`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `ola_user6`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `ola_user6`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `ola_user6`@`%`;
+
+
+# Uprawnienia dla `patryk_user23`@`%`
+
+GRANT USAGE ON *.* TO `patryk_user23`@`%` IDENTIFIED BY PASSWORD '*639C7A0691334D6820F3ACA32AC547DD6B5D15B9';
+
+GRANT SELECT ON `movielock`.`filmy` TO `patryk_user23`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `patryk_user23`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `patryk_user23`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `patryk_user23`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `patryk_user23`@`%`;
+
+
+# Uprawnienia dla `pawel_user21`@`%`
+
+GRANT USAGE ON *.* TO `pawel_user21`@`%` IDENTIFIED BY PASSWORD '*39B3948398CA2CA05B6D77D0E75F9B57DA53E6CC';
+
+GRANT SELECT ON `movielock`.`osoby` TO `pawel_user21`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `pawel_user21`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `pawel_user21`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `pawel_user21`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `pawel_user21`@`%`;
+
+
+# Uprawnienia dla `piotr_user7`@`%`
+
+GRANT USAGE ON *.* TO `piotr_user7`@`%` IDENTIFIED BY PASSWORD '*C4B721FA2C741306404E5007B7B9E47A185C7E49';
+
+GRANT SELECT ON `movielock`.`osoby` TO `piotr_user7`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `piotr_user7`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `piotr_user7`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `piotr_user7`@`%`;
+
+GRANT SELECT ON `movielock`.`filmy` TO `piotr_user7`@`%`;
+
+
+# Uprawnienia dla `tomek_user5`@`%`
+
+GRANT USAGE ON *.* TO `tomek_user5`@`%` IDENTIFIED BY PASSWORD '*9DCE4954CA0319FD2320E1145423064516EC41FB';
+
+GRANT SELECT ON `movielock`.`filmy` TO `tomek_user5`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `tomek_user5`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `tomek_user5`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `tomek_user5`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `tomek_user5`@`%`;
+
+
+# Uprawnienia dla `zosia_user10`@`%`
+
+GRANT USAGE ON *.* TO `zosia_user10`@`%` IDENTIFIED BY PASSWORD '*6273716DB97454D4F1FCFE07F9AB20C275E406C2';
+
+GRANT SELECT ON `movielock`.`filmy` TO `zosia_user10`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`oceny` TO `zosia_user10`@`%`;
+
+GRANT SELECT, INSERT, UPDATE ON `movielock`.`statusy_filmow` TO `zosia_user10`@`%`;
+
+GRANT SELECT ON `movielock`.`aktorzy` TO `zosia_user10`@`%`;
+
+GRANT SELECT ON `movielock`.`osoby` TO `zosia_user10`@`%`;
