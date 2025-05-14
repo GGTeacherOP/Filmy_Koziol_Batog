@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 14, 2025 at 07:43 PM
+-- Generation Time: Maj 14, 2025 at 08:03 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -280,23 +280,24 @@ CREATE TABLE `oceny_uzytkownikow` (
 CREATE TABLE `personel` (
   `ID` int(11) NOT NULL,
   `uzytkownik_id` int(11) DEFAULT NULL,
-  `uprawnienia` enum('edytor','moderator','admin') NOT NULL
+  `uprawnienia` enum('edytor','moderator','admin') NOT NULL,
+  `wynagrodzenie` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `personel`
 --
 
-INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`) VALUES
-(1, 26, 'edytor'),
-(2, 27, 'edytor'),
-(3, 28, 'edytor'),
-(4, 29, 'edytor'),
-(5, 30, 'edytor'),
-(6, 31, 'moderator'),
-(7, 32, 'moderator'),
-(8, 33, 'moderator'),
-(9, 34, 'admin');
+INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`, `wynagrodzenie`) VALUES
+(1, 26, 'edytor', 5500.00),
+(2, 27, 'edytor', 5500.00),
+(3, 28, 'edytor', 5500.00),
+(4, 29, 'edytor', 5500.00),
+(5, 30, 'edytor', 5500.00),
+(6, 31, 'moderator', 6300.00),
+(7, 32, 'moderator', 6300.00),
+(8, 33, 'moderator', 6300.00),
+(9, 34, 'admin', 9000.00);
 
 -- --------------------------------------------------------
 
