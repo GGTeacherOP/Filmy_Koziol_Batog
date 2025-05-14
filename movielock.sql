@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 11, 2025 at 06:41 PM
+-- Generation Time: Maj 14, 2025 at 07:43 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -274,10 +274,37 @@ CREATE TABLE `oceny_uzytkownikow` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `osoby`
+-- Struktura tabeli dla tabeli `personel`
 --
 
-CREATE TABLE `osoby` (
+CREATE TABLE `personel` (
+  `ID` int(11) NOT NULL,
+  `uzytkownik_id` int(11) DEFAULT NULL,
+  `uprawnienia` enum('edytor','moderator','admin') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `personel`
+--
+
+INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`) VALUES
+(1, 26, 'edytor'),
+(2, 27, 'edytor'),
+(3, 28, 'edytor'),
+(4, 29, 'edytor'),
+(5, 30, 'edytor'),
+(6, 31, 'moderator'),
+(7, 32, 'moderator'),
+(8, 33, 'moderator'),
+(9, 34, 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `rezyserzy`
+--
+
+CREATE TABLE `rezyserzy` (
   `ID` int(11) NOT NULL,
   `imie_nazwisko` varchar(255) NOT NULL,
   `zdjecie` varchar(255) DEFAULT NULL,
@@ -287,10 +314,10 @@ CREATE TABLE `osoby` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `osoby`
+-- Dumping data for table `rezyserzy`
 --
 
-INSERT INTO `osoby` (`ID`, `imie_nazwisko`, `zdjecie`, `ranking_popularnosci`, `zyciorys`, `ocena`) VALUES
+INSERT INTO `rezyserzy` (`ID`, `imie_nazwisko`, `zdjecie`, `ranking_popularnosci`, `zyciorys`, `ocena`) VALUES
 (1, 'Frank Darabont', 'https://fwcdn.pl/ppo/21/89/12189/450702_1.3.jpg', 1, 'Amerykański reżyser, scenarzysta i producent filmowy.', 8.50),
 (2, 'Francis Ford Coppola', 'https://fwcdn.pl/ppo/01/53/153/450699_1.3.jpg', 2, 'Amerykański reżyser, scenarzysta i producent filmowy, uważany za jednego z najwybitniejszych twórców kina.', 9.20),
 (3, 'Christopher Nolan', 'https://fwcdn.pl/ppo/08/96/40896/449999_1.3.jpg', 3, 'Brytyjsko-amerykański reżyser, scenarzysta i producent filmowy, znany z innowacyjnych i złożonych narracji.', 9.00),
@@ -363,33 +390,6 @@ INSERT INTO `osoby` (`ID`, `imie_nazwisko`, `zdjecie`, `ranking_popularnosci`, `
 (70, 'Christophe Barratier', 'https://fwcdn.pl/ppo/19/60/181960/282752.1.jpg', 70, 'Francuski reżyser i scenarzysta, znany przede wszystkim z filmu \"Les Choristes\", który opowiada historię muzyczną osadzoną w szkole dla chłopców. Barratier w swoich filmach często porusza tematy związane z muzyką, edukacją oraz siłą wspólnoty, a jego reżyseria cechuje się ciepłym podejściem do bohaterów i ich emocjonalnych przeżyć.', 7.90),
 (71, 'Giuseppe Tornatore', 'https://fwcdn.pl/ppo/09/10/10910/450733_1.3.jpg', 71, 'Włoski reżyser, scenarzysta i producent, najbardziej znany z filmu \"Cinema Paradiso\", który zdobył Oscara za najlepszy film nieanglojęzyczny. Jego twórczość często koncentruje się na tematach nostalgii, kina, a także emocjonalnych więzi między ludźmi. Tornatore jest mistrzem w łączeniu estetyki z głębokimi, poruszającymi historiami.', 8.60),
 (72, 'Stanley Kubrick', 'https://fwcdn.pl/ppo/00/62/62/452006_1.3.jpg', 72, 'Amerykański reżyser, scenarzysta i producent, uznawany za jednego z najwybitniejszych twórców w historii kina. Kubrick jest znany z tworzenia filmów, które zmieniają oblicze gatunków, takich jak \"2001: Odyseja kosmiczna\", \"Mechaniczna pomarańcza\" i \"Lśnienie\". Jego filmy często zawierają złożoną symbolikę, perfekcyjnie dopracowane kadry i mroczne, filozoficzne pytania dotyczące ludzkiej natury.', 9.50);
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `personel`
---
-
-CREATE TABLE `personel` (
-  `ID` int(11) NOT NULL,
-  `uzytkownik_id` int(11) DEFAULT NULL,
-  `uprawnienia` enum('edytor','moderator','admin') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `personel`
---
-
-INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`) VALUES
-(1, 26, 'edytor'),
-(2, 27, 'edytor'),
-(3, 28, 'edytor'),
-(4, 29, 'edytor'),
-(5, 30, 'edytor'),
-(6, 31, 'moderator'),
-(7, 32, 'moderator'),
-(8, 33, 'moderator'),
-(9, 34, 'admin');
 
 -- --------------------------------------------------------
 
@@ -532,6 +532,141 @@ CREATE TABLE `wszyscy_uzytkownicy` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `wystapienia`
+--
+
+CREATE TABLE `wystapienia` (
+  `id` int(11) NOT NULL,
+  `id_filmu` int(11) NOT NULL,
+  `id_aktora` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `wystapienia`
+--
+
+INSERT INTO `wystapienia` (`id`, `id_filmu`, `id_aktora`) VALUES
+(1, 1, 15),
+(2, 2, 6),
+(3, 2, 9),
+(4, 3, 2),
+(5, 3, 14),
+(6, 3, 19),
+(55, 4, 60),
+(8, 5, 73),
+(9, 6, 3),
+(56, 7, 77),
+(11, 8, 11),
+(10, 8, 12),
+(12, 8, 66),
+(57, 9, 29),
+(13, 10, 39),
+(58, 11, 70),
+(59, 12, 4),
+(60, 13, 7),
+(14, 14, 27),
+(61, 15, 63),
+(62, 16, 67),
+(63, 17, 18),
+(64, 18, 79),
+(65, 19, 32),
+(16, 20, 51),
+(15, 20, 65),
+(17, 21, 43),
+(19, 22, 30),
+(18, 22, 73),
+(20, 23, 5),
+(21, 23, 10),
+(22, 24, 19),
+(66, 25, 68),
+(24, 26, 1),
+(23, 26, 80),
+(26, 27, 24),
+(25, 27, 47),
+(27, 28, 35),
+(67, 29, 76),
+(28, 30, 3),
+(68, 31, 40),
+(69, 32, 59),
+(70, 33, 33),
+(71, 34, 13),
+(72, 35, 31),
+(73, 36, 75),
+(74, 37, 53),
+(75, 38, 20),
+(76, 39, 48),
+(77, 40, 25),
+(78, 41, 16),
+(29, 42, 10),
+(79, 43, 26),
+(80, 44, 57),
+(81, 45, 22),
+(82, 46, 36),
+(83, 47, 46),
+(84, 48, 54),
+(85, 49, 28),
+(86, 50, 58),
+(87, 51, 41),
+(88, 52, 72),
+(89, 53, 38),
+(30, 54, 37),
+(90, 55, 50),
+(31, 56, 1),
+(32, 56, 2),
+(33, 56, 66),
+(34, 57, 39),
+(35, 58, 9),
+(36, 59, 21),
+(91, 60, 44),
+(38, 61, 8),
+(37, 61, 9),
+(39, 62, 66),
+(92, 63, 23),
+(93, 64, 6),
+(94, 65, 42),
+(40, 66, 17),
+(41, 66, 24),
+(42, 67, 10),
+(43, 67, 24),
+(95, 68, 8),
+(96, 69, 34),
+(97, 70, 19),
+(98, 71, 10),
+(44, 72, 64),
+(99, 73, 73),
+(100, 74, 52),
+(101, 75, 45),
+(102, 76, 62),
+(103, 77, 69),
+(104, 78, 49),
+(105, 79, 55),
+(106, 80, 11),
+(107, 81, 47),
+(108, 82, 17),
+(109, 83, 15),
+(110, 84, 9),
+(111, 85, 56),
+(45, 86, 64),
+(112, 87, 21),
+(46, 88, 61),
+(47, 89, 71),
+(48, 90, 78),
+(113, 91, 5),
+(114, 92, 74),
+(49, 93, 17),
+(115, 94, 51),
+(51, 95, 3),
+(50, 95, 10),
+(52, 95, 32),
+(53, 96, 10),
+(116, 97, 27),
+(117, 98, 4),
+(118, 99, 3),
+(54, 100, 8);
+
+-- --------------------------------------------------------
+
+--
 -- Struktura widoku `oceny_uzytkownikow`
 --
 DROP TABLE IF EXISTS `oceny_uzytkownikow`;
@@ -554,7 +689,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_ocena`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_ocena`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`srednia_ocena` AS `srednia_ocena`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `osoby` on(`filmy`.`rezyser_id` = `osoby`.`ID`)) ORDER BY `filmy`.`srednia_ocena` DESC LIMIT 0, 100 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_ocena`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`srednia_ocena` AS `srednia_ocena`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`srednia_ocena` DESC LIMIT 0, 100 ;
 
 -- --------------------------------------------------------
 
@@ -563,7 +698,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_popularnosc`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_popularnosc`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `osoby` on(`filmy`.`rezyser_id` = `osoby`.`ID`)) ORDER BY `filmy`.`ranking_popularnosci` DESC LIMIT 0, 100 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_popularnosc`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`ranking_popularnosci` DESC LIMIT 0, 100 ;
 
 -- --------------------------------------------------------
 
@@ -572,7 +707,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_rezyserzy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_rezyserzy`  AS SELECT `osoby`.`ranking_popularnosci` AS `ranking_popularnosci`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM `osoby` ORDER BY `osoby`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_rezyserzy`  AS SELECT `rezyserzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `rezyserzy` ORDER BY `rezyserzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
 
 -- --------------------------------------------------------
 
@@ -618,17 +753,17 @@ ALTER TABLE `oceny`
   ADD KEY `uzytkownik_id` (`uzytkownik_id`);
 
 --
--- Indeksy dla tabeli `osoby`
---
-ALTER TABLE `osoby`
-  ADD PRIMARY KEY (`ID`);
-
---
 -- Indeksy dla tabeli `personel`
 --
 ALTER TABLE `personel`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `uzytkownik_id` (`uzytkownik_id`);
+
+--
+-- Indeksy dla tabeli `rezyserzy`
+--
+ALTER TABLE `rezyserzy`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indeksy dla tabeli `statusy_filmow`
@@ -645,6 +780,14 @@ ALTER TABLE `uzytkownicy`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `login` (`login`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indeksy dla tabeli `wystapienia`
+--
+ALTER TABLE `wystapienia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_filmu` (`id_filmu`,`id_aktora`),
+  ADD KEY `id_aktora` (`id_aktora`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -669,16 +812,16 @@ ALTER TABLE `oceny`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `osoby`
---
-ALTER TABLE `osoby`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
-
---
 -- AUTO_INCREMENT for table `personel`
 --
 ALTER TABLE `personel`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `rezyserzy`
+--
+ALTER TABLE `rezyserzy`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `statusy_filmow`
@@ -693,6 +836,12 @@ ALTER TABLE `uzytkownicy`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
+-- AUTO_INCREMENT for table `wystapienia`
+--
+ALTER TABLE `wystapienia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -700,7 +849,7 @@ ALTER TABLE `uzytkownicy`
 -- Constraints for table `filmy`
 --
 ALTER TABLE `filmy`
-  ADD CONSTRAINT `filmy_ibfk_1` FOREIGN KEY (`rezyser_id`) REFERENCES `osoby` (`ID`);
+  ADD CONSTRAINT `filmy_ibfk_1` FOREIGN KEY (`rezyser_id`) REFERENCES `rezyserzy` (`ID`);
 
 --
 -- Constraints for table `oceny`
@@ -721,6 +870,13 @@ ALTER TABLE `personel`
 ALTER TABLE `statusy_filmow`
   ADD CONSTRAINT `statusy_filmow_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `filmy` (`ID`),
   ADD CONSTRAINT `statusy_filmow_ibfk_2` FOREIGN KEY (`uzytkownik_id`) REFERENCES `uzytkownicy` (`ID`);
+
+--
+-- Constraints for table `wystapienia`
+--
+ALTER TABLE `wystapienia`
+  ADD CONSTRAINT `wystapienia_ibfk_1` FOREIGN KEY (`id_aktora`) REFERENCES `aktorzy` (`ID`),
+  ADD CONSTRAINT `wystapienia_ibfk_2` FOREIGN KEY (`id_filmu`) REFERENCES `filmy` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
