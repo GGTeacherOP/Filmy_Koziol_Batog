@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Pobierz użytkownika z bazy
+    // Pobranie użytkownika z bazy
     $query = "SELECT ID, login, haslo, rola FROM uzytkownicy WHERE login = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "s", $login);
@@ -22,15 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (mysqli_stmt_num_rows($stmt) === 1) {
         mysqli_stmt_bind_result($stmt, $id, $db_login, $db_password, $db_role);
         mysqli_stmt_fetch($stmt);
-
-        // Zmieniona weryfikacja hasła - proste porównanie tekstu
-        if ($password === $db_password) {  // Zmiana z password_verify na proste porównanie
-            // Ustaw sesję
+        //weryfikacja hasła
+        if ($password === $db_password) {
+            // Ustawienie sesji
             $_SESSION['user_id'] = $id;
             $_SESSION['user_login'] = $db_login;
             $_SESSION['user_role'] = $db_role;
 
-            // Przekieruj w zależności od roli
+            // Przekierowanie w zależności od roli
             switch ($db_role) {
                 case 'admin':
                     header("Location: admin_panel.php");
