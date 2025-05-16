@@ -35,12 +35,15 @@ session_start();
     </header>
     <main>
         <section class="main-lewy">
+            <br>
+            <br>
+            <br>
             <img alt="logo" src="logo.png" class="logo">
             <h1>Movielock</h1>
             <h3>Skrytka na filmy</h3>
         </section>
         <section class="main-prawy">
-            <img alt="obraz" src="obraz.png">
+            <img alt="obraz" src="obraz.jpeg" width="100%" height="600px">
         </section>
         <h2 class="category-title">Dramat</h2>
         <section class="film"><a class="info" href="filmy_info.html"><img alt="film" src=".png"><h2>Film</h2></a></section>
