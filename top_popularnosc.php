@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 100 Najpopularniejszych | Movielock</title>
+    <link rel="stylesheet" href="styl.css">
+    <link rel="stylesheet" href="listy.css">
+</head>
+<body>
+    <header>
+        <img alt="logo" src="logo.png">
+        <section>
+            <h1>Movielock</h1>
+            <a href="login.php" class="odstep">Logowanie</a>
+            <a href="top_popularnosc.php">Najpopularniejsze</a>
+            <a href="top_ocena.php">Najlepsze</a>
+            <a href="index.php">Strona Główna</a>
+        </section>
+    </header>
+    <main>
+        <h1>Top 100 Najpopularniejszych Filmów</h1>
+        <table>
+            <tr>
+                <th class="numcol">Num</th>
+                <th class="zdjcol">Zdjęcie</th>
+                <th class="nazwacol">Nazwa</th>
+                <th class="rezcol">Reż.</th>
+            </tr>
+            <tr class="top1">
+                <td>1.</td>
+                <td><img src=".png"></td>
+                <td><a href="film_info.html">Film</a></td>
+                <td><a href="obsada_info.html">Reżyser</a></td>
+            </tr>
+            <tr class="top2">
+                <td>2.</td>
+                <td><img src=".png"></td>
+                <td><a href="film_info.html">Film</a></td>
+                <td><a href="obsada_info.html">Reżyser</a></td>
+            </tr>
+            <tr class="top3">
+                <td>3.</td>
+                <td><img src=".png"></td>
+                <td><a href="film_info.html">Film</a></td>
+                <td><a href="obsada_info.html">Reżyser</a></td>
+            </tr>
+            <script>
+                for (i=4;i<=100;i++){
+                    document.write(" <tr class='lower'><td>"+i+".</td><td><img src='.png'></td><td><a href='film_info.html'>Film</a></td><td><a href='obsada_info.html'>Reżyser</a></td></tr>")
+                }
+            </script>
+        </table>
+        <div class="odstep"></div>
+    </main>
+    <footer>
+        <section>
+            <h1>Movielock</h1>
+            <a href="kontakt.html">Kontakt</a>
+        </section>
+    </footer>
+</body>
+</html>
