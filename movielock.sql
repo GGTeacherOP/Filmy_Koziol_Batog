@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 14, 2025 at 08:03 PM
+-- Generation Time: Maj 17, 2025 at 03:11 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -413,7 +413,8 @@ CREATE TABLE `statusy_filmow` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_aktorzy` (
-`ranking_popularnosci` int(11)
+`id` int(11)
+,`ranking_popularnosci` int(11)
 ,`imie_nazwisko` varchar(100)
 );
 
@@ -424,7 +425,8 @@ CREATE TABLE `top_aktorzy` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_ocena` (
-`zdjecie` varchar(255)
+`id` int(11)
+,`zdjecie` varchar(255)
 ,`tytul` varchar(255)
 ,`srednia_ocena` decimal(3,2)
 ,`imie_nazwisko` varchar(255)
@@ -437,7 +439,8 @@ CREATE TABLE `top_ocena` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_popularnosc` (
-`zdjecie` varchar(255)
+`id` int(11)
+,`zdjecie` varchar(255)
 ,`tytul` varchar(255)
 ,`imie_nazwisko` varchar(255)
 );
@@ -449,7 +452,8 @@ CREATE TABLE `top_popularnosc` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_rezyserzy` (
-`ranking_popularnosci` int(11)
+`id` int(11)
+,`ranking_popularnosci` int(11)
 ,`imie_nazwisko` varchar(255)
 );
 
@@ -681,7 +685,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_aktorzy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ID` AS `id`, `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
 
 -- --------------------------------------------------------
 
@@ -690,7 +694,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_ocena`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_ocena`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`srednia_ocena` AS `srednia_ocena`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`srednia_ocena` DESC LIMIT 0, 100 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_ocena`  AS SELECT `filmy`.`ID` AS `id`, `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`srednia_ocena` AS `srednia_ocena`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`srednia_ocena` DESC LIMIT 0, 100 ;
 
 -- --------------------------------------------------------
 
@@ -699,7 +703,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_popularnosc`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_popularnosc`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`ranking_popularnosci` DESC LIMIT 0, 100 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_popularnosc`  AS SELECT `filmy`.`ID` AS `id`, `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`ranking_popularnosci` ASC LIMIT 0, 100 ;
 
 -- --------------------------------------------------------
 
@@ -708,7 +712,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_rezyserzy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_rezyserzy`  AS SELECT `rezyserzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `rezyserzy` ORDER BY `rezyserzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_rezyserzy`  AS SELECT `rezyserzy`.`ID` AS `id`, `rezyserzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `rezyserzy` ORDER BY `rezyserzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
 
 -- --------------------------------------------------------
 
