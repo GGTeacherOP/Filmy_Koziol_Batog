@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 11, 2025 at 06:41 PM
+-- Generation Time: Maj 17, 2025 at 04:36 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -274,10 +274,38 @@ CREATE TABLE `oceny_uzytkownikow` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `osoby`
+-- Struktura tabeli dla tabeli `personel`
 --
 
-CREATE TABLE `osoby` (
+CREATE TABLE `personel` (
+  `ID` int(11) NOT NULL,
+  `uzytkownik_id` int(11) DEFAULT NULL,
+  `uprawnienia` enum('edytor','moderator','admin') NOT NULL,
+  `wynagrodzenie` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `personel`
+--
+
+INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`, `wynagrodzenie`) VALUES
+(1, 26, 'edytor', 5500.00),
+(2, 27, 'edytor', 5500.00),
+(3, 28, 'edytor', 5500.00),
+(4, 29, 'edytor', 5500.00),
+(5, 30, 'edytor', 5500.00),
+(6, 31, 'moderator', 6300.00),
+(7, 32, 'moderator', 6300.00),
+(8, 33, 'moderator', 6300.00),
+(9, 34, 'admin', 9000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `rezyserzy`
+--
+
+CREATE TABLE `rezyserzy` (
   `ID` int(11) NOT NULL,
   `imie_nazwisko` varchar(255) NOT NULL,
   `zdjecie` varchar(255) DEFAULT NULL,
@@ -287,10 +315,10 @@ CREATE TABLE `osoby` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `osoby`
+-- Dumping data for table `rezyserzy`
 --
 
-INSERT INTO `osoby` (`ID`, `imie_nazwisko`, `zdjecie`, `ranking_popularnosci`, `zyciorys`, `ocena`) VALUES
+INSERT INTO `rezyserzy` (`ID`, `imie_nazwisko`, `zdjecie`, `ranking_popularnosci`, `zyciorys`, `ocena`) VALUES
 (1, 'Frank Darabont', 'https://fwcdn.pl/ppo/21/89/12189/450702_1.3.jpg', 1, 'Amerykański reżyser, scenarzysta i producent filmowy.', 8.50),
 (2, 'Francis Ford Coppola', 'https://fwcdn.pl/ppo/01/53/153/450699_1.3.jpg', 2, 'Amerykański reżyser, scenarzysta i producent filmowy, uważany za jednego z najwybitniejszych twórców kina.', 9.20),
 (3, 'Christopher Nolan', 'https://fwcdn.pl/ppo/08/96/40896/449999_1.3.jpg', 3, 'Brytyjsko-amerykański reżyser, scenarzysta i producent filmowy, znany z innowacyjnych i złożonych narracji.', 9.00),
@@ -367,33 +395,6 @@ INSERT INTO `osoby` (`ID`, `imie_nazwisko`, `zdjecie`, `ranking_popularnosci`, `
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `personel`
---
-
-CREATE TABLE `personel` (
-  `ID` int(11) NOT NULL,
-  `uzytkownik_id` int(11) DEFAULT NULL,
-  `uprawnienia` enum('edytor','moderator','admin') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `personel`
---
-
-INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`) VALUES
-(1, 26, 'edytor'),
-(2, 27, 'edytor'),
-(3, 28, 'edytor'),
-(4, 29, 'edytor'),
-(5, 30, 'edytor'),
-(6, 31, 'moderator'),
-(7, 32, 'moderator'),
-(8, 33, 'moderator'),
-(9, 34, 'admin');
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `statusy_filmow`
 --
 
@@ -412,7 +413,8 @@ CREATE TABLE `statusy_filmow` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_aktorzy` (
-`ranking_popularnosci` int(11)
+`id` int(11)
+,`ranking_popularnosci` int(11)
 ,`imie_nazwisko` varchar(100)
 );
 
@@ -423,8 +425,10 @@ CREATE TABLE `top_aktorzy` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_ocena` (
-`zdjecie` varchar(255)
+`id` int(11)
+,`zdjecie` varchar(255)
 ,`tytul` varchar(255)
+,`id_rezysera` int(11)
 ,`srednia_ocena` decimal(3,2)
 ,`imie_nazwisko` varchar(255)
 );
@@ -436,8 +440,10 @@ CREATE TABLE `top_ocena` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_popularnosc` (
-`zdjecie` varchar(255)
+`id` int(11)
+,`zdjecie` varchar(255)
 ,`tytul` varchar(255)
+,`id_rezysera` int(11)
 ,`imie_nazwisko` varchar(255)
 );
 
@@ -448,7 +454,8 @@ CREATE TABLE `top_popularnosc` (
 -- (See below for the actual view)
 --
 CREATE TABLE `top_rezyserzy` (
-`ranking_popularnosci` int(11)
+`id` int(11)
+,`ranking_popularnosci` int(11)
 ,`imie_nazwisko` varchar(255)
 );
 
@@ -520,7 +527,18 @@ INSERT INTO `uzytkownicy` (`ID`, `login`, `haslo`, `rola`, `email`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Zastąpiona struktura widoku `wszyscy_uzytkownicy`
+-- (See below for the actual view)
+--
+CREATE TABLE `wszyscy_uzytkownicy` (
+`ID` int(11)
+,`login` varchar(255)
+,`email` varchar(100)
+);
 
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `wystapienia`
 --
 
@@ -652,14 +670,6 @@ INSERT INTO `wystapienia` (`id`, `id_filmu`, `id_aktora`) VALUES
 (117, 98, 4),
 (118, 99, 3),
 (54, 100, 8);
--- Zastąpiona struktura widoku `wszyscy_uzytkownicy`
--- (See below for the actual view)
---
-CREATE TABLE `wszyscy_uzytkownicy` (
-`ID` int(11)
-,`login` varchar(255)
-,`email` varchar(100)
-);
 
 -- --------------------------------------------------------
 
@@ -677,7 +687,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_aktorzy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ID` AS `id`, `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` DESC LIMIT 0, 20 ;
 
 -- --------------------------------------------------------
 
@@ -686,7 +696,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_ocena`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_ocena`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`srednia_ocena` AS `srednia_ocena`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `osoby` on(`filmy`.`rezyser_id` = `osoby`.`ID`)) ORDER BY `filmy`.`srednia_ocena` DESC LIMIT 0, 100 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_ocena`  AS SELECT `filmy`.`ID` AS `id`, `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`rezyser_id` AS `id_rezysera`, `filmy`.`srednia_ocena` AS `srednia_ocena`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`srednia_ocena` DESC LIMIT 0, 100 ;
 
 -- --------------------------------------------------------
 
@@ -695,7 +705,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_popularnosc`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_popularnosc`  AS SELECT `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `osoby` on(`filmy`.`rezyser_id` = `osoby`.`ID`)) ORDER BY `filmy`.`ranking_popularnosci` DESC LIMIT 0, 100 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_popularnosc`  AS SELECT `filmy`.`ID` AS `id`, `filmy`.`zdjecie` AS `zdjecie`, `filmy`.`tytul` AS `tytul`, `filmy`.`rezyser_id` AS `id_rezysera`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM (`filmy` join `rezyserzy` on(`filmy`.`rezyser_id` = `rezyserzy`.`ID`)) ORDER BY `filmy`.`ranking_popularnosci` ASC LIMIT 0, 100 ;
 
 -- --------------------------------------------------------
 
@@ -704,7 +714,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_rezyserzy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_rezyserzy`  AS SELECT `osoby`.`ranking_popularnosci` AS `ranking_popularnosci`, `osoby`.`imie_nazwisko` AS `imie_nazwisko` FROM `osoby` ORDER BY `osoby`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_rezyserzy`  AS SELECT `rezyserzy`.`ID` AS `id`, `rezyserzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `rezyserzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `rezyserzy` ORDER BY `rezyserzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
 
 -- --------------------------------------------------------
 
@@ -750,17 +760,17 @@ ALTER TABLE `oceny`
   ADD KEY `uzytkownik_id` (`uzytkownik_id`);
 
 --
--- Indeksy dla tabeli `osoby`
---
-ALTER TABLE `osoby`
-  ADD PRIMARY KEY (`ID`);
-
---
 -- Indeksy dla tabeli `personel`
 --
 ALTER TABLE `personel`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `uzytkownik_id` (`uzytkownik_id`);
+
+--
+-- Indeksy dla tabeli `rezyserzy`
+--
+ALTER TABLE `rezyserzy`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indeksy dla tabeli `statusy_filmow`
@@ -779,7 +789,6 @@ ALTER TABLE `uzytkownicy`
   ADD UNIQUE KEY `email` (`email`);
 
 --
-
 -- Indeksy dla tabeli `wystapienia`
 --
 ALTER TABLE `wystapienia`
@@ -788,7 +797,6 @@ ALTER TABLE `wystapienia`
   ADD KEY `id_aktora` (`id_aktora`);
 
 --
-
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -811,16 +819,16 @@ ALTER TABLE `oceny`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `osoby`
---
-ALTER TABLE `osoby`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
-
---
 -- AUTO_INCREMENT for table `personel`
 --
 ALTER TABLE `personel`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `rezyserzy`
+--
+ALTER TABLE `rezyserzy`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `statusy_filmow`
@@ -848,7 +856,7 @@ ALTER TABLE `wystapienia`
 -- Constraints for table `filmy`
 --
 ALTER TABLE `filmy`
-  ADD CONSTRAINT `filmy_ibfk_1` FOREIGN KEY (`rezyser_id`) REFERENCES `osoby` (`ID`);
+  ADD CONSTRAINT `filmy_ibfk_1` FOREIGN KEY (`rezyser_id`) REFERENCES `rezyserzy` (`ID`);
 
 --
 -- Constraints for table `oceny`
