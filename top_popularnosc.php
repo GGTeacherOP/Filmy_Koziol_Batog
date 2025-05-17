@@ -27,29 +27,40 @@
                 <th class="nazwacol">Nazwa</th>
                 <th class="rezcol">Reż.</th>
             </tr>
-            <tr class="top1">
-                <td>1.</td>
-                <td><img src=".png"></td>
-                <td><a href="film_info.html">Film</a></td>
-                <td><a href="obsada_info.html">Reżyser</a></td>
-            </tr>
-            <tr class="top2">
-                <td>2.</td>
-                <td><img src=".png"></td>
-                <td><a href="film_info.html">Film</a></td>
-                <td><a href="obsada_info.html">Reżyser</a></td>
-            </tr>
-            <tr class="top3">
-                <td>3.</td>
-                <td><img src=".png"></td>
-                <td><a href="film_info.html">Film</a></td>
-                <td><a href="obsada_info.html">Reżyser</a></td>
-            </tr>
-            <script>
-                for (i=4;i<=100;i++){
-                    document.write(" <tr class='lower'><td>"+i+".</td><td><img src='.png'></td><td><a href='film_info.html'>Film</a></td><td><a href='obsada_info.html'>Reżyser</a></td></tr>")
-                }
-            </script>
+            <?php
+            //dołącenie pliku z połączeniem z bazą danych
+            require_once 'db_connect.php';
+
+            // Zapytanie SQL z widokiem
+            $query = "SELECT id, zdjecie, tytul, imie_nazwisko, id_rezysera FROM `top_popularnosc`";
+
+            $result = mysqli_query($conn, $query);
+
+            if (!$result) {
+                die("Błąd zapytania: " . mysqli_error($conn));
+            }
+
+            $counter = 1;
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Dodanie specjalnej klasy dla pierwszych 3 pozycji
+                $row_class = ($counter <= 3) ? "top$counter" : "lower";
+                
+                echo "<tr class='$row_class'>";
+                echo "<td>" . $counter . ".</td>";
+                echo "<td class='filmZdj'><img style='width: 200px; height: 350px;' src='" . htmlspecialchars($row['zdjecie']) . "' alt='Plakat filmu'></td>";
+                echo "<td style='text-align: center;'>
+                        <a href='filmy_info.php?id=" . $row['id'] . "' style='display: inline-block; width: 100%; text-align: center;'>
+                          " . htmlspecialchars($row['tytul']) . "
+                        </a>
+                      </td>";
+                echo "<td style='text-align: center;'><a href='rezyser_info.php?id=" . $row['id_rezysera'] . "' style='display: inline-block; width: 100%; text-align: center;'>" . htmlspecialchars($row['imie_nazwisko']) . "</a></td>";
+                echo "</tr>";
+                
+                $counter++;
+            }
+
+            mysqli_close($conn);
+            ?>
         </table>
         <div class="odstep"></div>
     </main>
