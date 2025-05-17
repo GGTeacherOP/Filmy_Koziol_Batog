@@ -28,8 +28,8 @@ session_start();
             <?php else: ?>
                 <a href="login.php" class="odstep">Logowanie</a>
             <?php endif; ?>
-            <a href="top_popularnosc.html">Najpopularniejsze</a>
-            <a href="top_ocena.html">Najlepsze</a>
+            <a href="top_popularnosc.php">Najpopularniejsze</a>
+            <a href="top_ocena.php">Najlepsze</a>
             <a href="index.php">Strona Główna</a>
         </section>
     </header>

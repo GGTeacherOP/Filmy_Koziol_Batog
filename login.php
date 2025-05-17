@@ -71,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section>
             <h1>Movielock</h1>
             <a href="login.php" class="odstep">Logowanie</a>
-            <a href="top_popularnosc.html">Najpopularniejsze</a>
-            <a href="top_ocena.html">Najlepsze</a>
+            <a href="top_popularnosc.php">Najpopularniejsze</a>
+            <a href="top_ocena.php">Najlepsze</a>
             <a href="index.php">Strona Główna</a>
         </section>
     </header>
