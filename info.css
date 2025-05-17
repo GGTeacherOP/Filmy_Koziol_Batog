@@ -38,14 +38,11 @@ div a, h4 a {
     float:left;
 }
 .row3 {
-     margin-top:15px;
+    margin-top:15px;
     clear: both;
     width: 100%;
     overflow-x: auto;
     white-space: nowrap;
-}
-.row4{
-
 }
 .rezyser {
     text-align: left;
