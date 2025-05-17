@@ -46,11 +46,17 @@
     width:170px;
     border-top-left-radius:30px;
     border-top-right-radius:30px;
+
 }
 .film h2 {
     margin-top:15px;
     margin-left:10px;
+    font-size:medium;
 }
 .info {
     float:unset;
+}
+.logo{
+    width: 250px;
+    height: 250px;
 }

@@ -32,6 +32,10 @@ input {
     padding:5px;
     border:2px solid #111;
     padding-left:15px;
+    color:white;
+}
+.lastinput{
+    margin-bottom:0px;
 }
 .submit {
     width:340px;
@@ -49,4 +53,9 @@ input {
 }
 .zmiana_strony {
     text-decoration: underline;
+}
+span {
+    display:none;
+    color:red;
+    font-size:12px;
 }
