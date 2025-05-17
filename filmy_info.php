@@ -15,7 +15,7 @@
     $film_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
     
     // Zapytanie o informacje o filmie
-    $query_film = "SELECT f.*, r.imie_nazwisko AS rezyser 
+    $query_film = "SELECT f.*, r.imie_nazwisko AS rezyser , r.ID AS id_rezysera
                   FROM filmy f 
                   JOIN rezyserzy r ON f.rezyser_id = r.ID 
                   WHERE f.ID = $film_id";
@@ -28,7 +28,7 @@
     $film = mysqli_fetch_assoc($result_film);
     
     // Zapytanie o aktorów w filmie (ograniczone do 5)
-    $query_aktorzy = "SELECT a.imie_nazwisko, a.zdjecie 
+    $query_aktorzy = "SELECT a.ID, a.imie_nazwisko, a.zdjecie 
                      FROM aktorzy a
                      JOIN wystapienia w ON a.ID = w.id_aktora
                      WHERE w.id_filmu = $film_id
@@ -41,10 +41,10 @@
         <img alt="logo" src="logo.png">
         <section>
             <h1>Movielock</h1>
-            <a href="login.html" class="odstep">Logowanie</a>
+            <a href="login.php" class="odstep">Logowanie</a>
             <a href="top_popularnosc.php">Najpopularniejsze</a>
             <a href="top_ocena.php">Najlepsze</a>
-            <a href="index.html">Strona Główna</a>
+            <a href="index.php">Strona Główna</a>
         </section>
     </header>
     <main>
@@ -54,7 +54,11 @@
         <section class="main-prawy">
             <h2><?php echo htmlspecialchars($film['tytul']); ?></h2>
             <section class="row1">
-                <h4 class="rezyser"><a href="obsada_info.html"><?php echo htmlspecialchars($film['rezyser']); ?></a></h4>
+                <h4 class="rezyser">
+                <a href="rezyser_info.php?id=<?php echo $film['id_rezysera']; ?>">
+                <?php echo htmlspecialchars($film['rezyser']); ?>
+                </a>
+                </h4>
                 <h4 class="gatunek">Gatunek: <?php echo htmlspecialchars($film['gatunek']); ?></h4><br>
             </section>
             <section class="row2">
@@ -67,7 +71,7 @@
                 <?php
                 if ($result_aktorzy && mysqli_num_rows($result_aktorzy) > 0) {
                     while ($aktor = mysqli_fetch_assoc($result_aktorzy)) {
-                        echo '<div class="aktor"><a href="obsada_info.php">';
+                        echo '<div class="aktor"><a href="obsada_info.php?id=' . $aktor['ID'] . '">';
                         echo '<img src="' . htmlspecialchars($aktor['zdjecie']) . '" alt="' . htmlspecialchars($aktor['imie_nazwisko']) . '">';
                         echo '<p>' . htmlspecialchars($aktor['imie_nazwisko']) . '</p>';
                         echo '</a></div>';

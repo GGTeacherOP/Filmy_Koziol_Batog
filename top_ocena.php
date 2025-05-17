@@ -33,7 +33,7 @@
             require_once 'db_connect.php';
 
             // Zapytanie SQL z widokiem
-            $query = "SELECT id, zdjecie, tytul, srednia_ocena, imie_nazwisko FROM `top_ocena`";
+            $query = "SELECT id, zdjecie, tytul, srednia_ocena, imie_nazwisko, id_rezysera FROM `top_ocena`";
 
             $result = mysqli_query($conn, $query);
 
@@ -55,7 +55,7 @@
                         </a>
                       </td>";
                 echo "<td>" . number_format($row['srednia_ocena'], 1) . "</td>";
-                echo "<td>" . htmlspecialchars($row['imie_nazwisko']) . "</td>";
+                echo "<td style='text-align: center;'><a href='rezyser_info.php?id=" . $row['id_rezysera'] . "' style='display: inline-block; width: 100%; text-align: center;'>" . htmlspecialchars($row['imie_nazwisko']) . "</a></td>";
                 echo "</tr>";
                 
                 $counter++;
