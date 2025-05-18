@@ -24,10 +24,10 @@ td a{
 }
 .top3 {
     background-color: #951;
-}
+}/* style dla pierwszych 3 rekordów */
 .top1, .top2, .top3, .lower {
     height:80px;
-}
+}/* style dla pierwszych 3 rekordów i wszystkich niżej*/
 main h1 {
     margin-top:6%;
     margin-left:40px;
@@ -36,7 +36,7 @@ tr td:first-child, tr th:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-
+/* zaokrąglenie (^ lewych / v prawych ) rogów w każdym rzędzie */
 tr td:last-child, tr th:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -59,11 +59,11 @@ th {
 }
 .rezcol{
     width:20%
-}
+}/* ustalenie szerokości dla każdej kolumny */
 
 .odstep{
     height: 40px;
-}
+}/* odstęp od końca strony*/
 .filmZdj img{
     width: 500px;
     height: 500px;

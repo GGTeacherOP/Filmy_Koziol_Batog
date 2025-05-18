@@ -8,6 +8,7 @@ $con=mysqli_connect("localhost","root","","movielock");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administratora | Movielock</title>
+        <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="styl.css">
     <link rel="stylesheet" href="panel.css">
     <script>
@@ -51,7 +52,7 @@ $con=mysqli_connect("localhost","root","","movielock");
     }
     
     if($_GET['mode']=="table"): ?>
-
+    <div>
     <table class="main_table">
         <tr>
             <td class="category" onclick="redirecttab('aktorzy')" rowspan="4">Tabele</td>
@@ -80,9 +81,8 @@ $con=mysqli_connect("localhost","root","","movielock");
             <td onclick="redirecttab('wystapienia')">wystąpienia</td>
         </tr>
     </table>
-
     <?php elseif ($_GET['mode']=="view"): ?>
-
+    <div>
     <table class="main_table">
         <tr>
             <td class="category" onclick="redirecttab('aktorzy')" rowspan="4">Tabele</td>
@@ -101,16 +101,18 @@ $con=mysqli_connect("localhost","root","","movielock");
             <td class="category" onclick="redirectvie('oceny_uzytkownikow')"rowspan="4">Widoki</td>
             <td onclick="redirectvie('top_rezyserzy')">top rezyserzy</td>
         </tr>
-        <tr>
-            <td onclick="redirectvie('ulubione_filmy')">ulubione filmy</td>
-        </tr>
+
         <tr>
             <td onclick="redirectvie('wszyscy_uzytkownicy')">wszyscy uzytkownicy</td>
         </tr>
         <tr>
             <td></td>
         </tr>
+        <tr>
+            <td></td>
+        </tr>
     </table>
+    </div>
     <?php endif; ?>
                     <table class="display_table">
                     <?php 
@@ -126,7 +128,13 @@ $con=mysqli_connect("localhost","root","","movielock");
                         }
                     $qry=mysqli_query($con, "SELECT * FROM ".$tab);
                     $cols=mysqli_field_count($con);
+                    $qry2=mysqli_query($con, "DESCRIBE ".$tab);
                     if (mysqli_num_rows($qry)>0){
+                        echo "<tr>";
+                        while($names=mysqli_fetch_array($qry2)){
+                            echo "<th>".$names[0]."</th>";
+                        }
+                        echo "</tr>";
                         while ($row=mysqli_fetch_row($qry)){
                             echo "<tr>";
                             for($i=0;$i<$cols;$i++){
@@ -143,7 +151,6 @@ $con=mysqli_connect("localhost","root","","movielock");
                     }
                     
                     ?>
-                </table>
     <footer>
         <section>
             <h1>Movielock</h1>

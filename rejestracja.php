@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja | Movielock</title>
+    <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="styl.css">
     <link rel="stylesheet" href="login.css">
 </head>
@@ -39,9 +40,9 @@
                 <span id="haspotw">Hasła muszą się zgadzać</span><br>
                 <span id="nieok">Należy wpisać poprawne dane</span><br>
                 <input type="submit" value="Zarejestruj się" class="submit" name="submit" style="margin-top:0;"><br><br>
-            </form>
+            </form><!-- Formularz rejestracji na stronie rejestracja.php-->
             <p>Chcesz się zalogować?</p>
-            <a class="zmiana_strony" href="login.php">Zaloguj się</a>
+            <a class="zmiana_strony" href="login.php">Zaloguj się</a><!-- Przycisk odsyłający na stronę z logowaniem-->
 
         </section>
     </main>
@@ -54,20 +55,21 @@
 </body>
 </html>
 <?php
-$issetlog=false;
+$issetlog=false;//Ustawienie zmiennych potwierdzających prawidłowość danych
 $issetemail=false;
 $potw_haslo=false;
 $qry=mysqli_query(mysqli_connect("localhost","root","","movielock"),"SELECT login FROM uzytkownicy;");
 
 if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && isset($_POST['has1']) && isset($_POST['has2'])){
     $log=$_POST['log'];
-    if($log!=""){
+    if($log!=""){//Jeżeli login jest niepusty
         while ($row=mysqli_fetch_array($qry)){
             if ($row[0]==$log){
                 echo("<script>document.getElementById('login_exist').style.display='initial';</script>");
-                break;
+                $issetlog=false;
+                break;//Jeżeli występuje chociaż jeden taki sam login,pokazuje błąd i kończy pętle
             } else {
-                $issetlog=true;
+                $issetlog=true;//Jeżeli nie znajdzie potwierdza login
             }
         }
     } else {
@@ -82,7 +84,7 @@ if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && 
     $has1=$_POST['has1'];
     $has2=$_POST['has2'];
     if($has1!="" && $has2!=""){
-        if ($has1==$has2){
+        if ($has1==$has2){//Obydwa hasła muszą się zgadzać, jeżeli nie, pokazuje błąd
             $has_potw=$has1;
         } else {
             echo("<script>document.getElementById('haspotw').style.display='initial';</script>");
@@ -99,7 +101,7 @@ if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && 
     }
     echo("<script>console.log('".$log."');console.log('".$email."');console.log('".$has1."');console.log('".$has2."');console.log('".$potw_haslo."');");
 }
-if ($issetlog && $issetemail && $potw_haslo){
+if ($issetlog && $issetemail && $potw_haslo){//Jeżeli wszystko się zgadza, tworzy użytkownika
     $qry = mysqli_query(mysqli_connect("localhost","root","","movielock"), "INSERT INTO `uzytkownicy`(`login`, `haslo`, `rola`, `email`) VALUES ('".$log."','".$has_potw."','uzytkownik','".$email."')");
     header('Location: login.php');
 }

@@ -7,8 +7,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top 100 Najlepszych | Movielock</title>
+    <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="styl.css">
-    <link rel="stylesheet" href="listy.css">
+    <link rel="stylesheet" href="listy.css"><!-- Połączenie do pliku ze stylami używanego na stronach z top listami -->
 </head>
 <body>
         <header>
@@ -42,7 +43,7 @@ session_start();
                 <th class="nazwacol">Nazwa</th>
                 <th class="ocenacol">Ocena</th>
                 <th class="rezcol">Reż.</th>
-            </tr>
+            </tr><!-- Rząd nagłówka z klasami dla ustawienia stylów-->
             <?php
             // Dołączenie pliku z połączeniem do bazy danych
             require_once 'db_connect.php';
@@ -79,7 +80,8 @@ session_start();
             mysqli_close($conn);
             ?>
         </table>
-        <div class="odstep"></div>
+        <div class="odstep"></div><!-- div dający odstęp mędzy dołem tabeli 
+        (wygenerowane skryptem) a stopką dla łatwiejszej widoczności ostatniego rekordu-->
     </main>
     <footer>
         <section>
