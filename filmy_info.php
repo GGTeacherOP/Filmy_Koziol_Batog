@@ -65,34 +65,31 @@ session_start();
     </header>
     <main>
         <section class="main-lewy">
-            <img style='width: 400px; height: 600px;' src="<?php echo htmlspecialchars($film['zdjecie']); ?>" alt="Plakat filmu"><!-- ustawienie adresu obrazu jako link z bazy-->
+            <img style='width: 400px; height: 600px;' src="<?php echo htmlspecialchars($film['zdjecie']); ?>" alt="Plakat filmu">
         </section>
         <section class="main-prawy">
-            <h2><?php echo htmlspecialchars($film['tytul']); ?></h2><!-- wypisanie tytułu z bazy-->
+            <h2><?php echo htmlspecialchars($film['tytul']); ?></h2>
             <section class="row1">
                 <h4 class="rezyser">
                 <a href="rezyser_info.php?id=<?php echo $film['id_rezysera']; ?>">
-                <?php echo htmlspecialchars($film['rezyser']); ?><!-- wypisanie imienia reżysera z bazy-->
+                <?php echo htmlspecialchars($film['rezyser']); ?>
                 </a>
                 </h4>
-                <h4 class="gatunek">Gatunek: <?php echo htmlspecialchars($film['gatunek']); ?></h4><br><!-- wypisanie gatunku z bazy-->
+                <h4 class="gatunek">Gatunek: <?php echo htmlspecialchars($film['gatunek']); ?></h4><br>
             </section>
             <section class="row2">
-                <div class="popularnosc"><h5 class="miejsce">#<?php echo htmlspecialchars($film['ranking_popularnosci']); ?></h5><h5 class="podtekst">Najpopularniejszy</h5></div><!-- wypisanie rankingu z bazy-->
-                <div class="ocena"><h5 class="gwiazdy"><?php echo htmlspecialchars($film['srednia_ocena']); ?></h5></div><!-- wypisanie oceny z bazy-->
+                <div class="popularnosc"><h5 class="miejsce">#<?php echo htmlspecialchars($film['ranking_popularnosci']); ?></h5><h5 class="podtekst">Najpopularniejszy</h5></div>
+                <div class="ocena"><h5 class="gwiazdy"><?php echo htmlspecialchars($film['srednia_ocena']); ?></h5></div>
             </section>
-            <div class="opis"><h5 class="opis-tekst"><?php echo htmlspecialchars($film['opis']); ?></h5></div><!-- wypisanie opisu z bazy-->
-                <form method="post" style="float:right;">
-                    <input id="przycisk_kup" type="submit" name="kup" value="Kup">
-                </form><!-- formularz kupna filmu -->
+            <div class="opis"><h5 class="opis-tekst"><?php echo htmlspecialchars($film['opis']); ?></h5></div>
             <div class="clearfix"></div>
             <section class="row3">
                 <?php
-                if ($result_aktorzy && mysqli_num_rows($result_aktorzy) > 0) {//Sprawdzenie czy aktorzy istnieją
+                if ($result_aktorzy && mysqli_num_rows($result_aktorzy) > 0) {
                     while ($aktor = mysqli_fetch_assoc($result_aktorzy)) {
-                        echo '<div class="aktor"><a href="obsada_info.php?id=' . $aktor['ID'] . '">';//wypisanie ich
+                        echo '<div class="aktor"><a href="obsada_info.php?id=' . $aktor['ID'] . '">';
                         echo '<img src="' . htmlspecialchars($aktor['zdjecie']) . '" alt="' . htmlspecialchars($aktor['imie_nazwisko']) . '">';
-                        echo '<br><br><br><br><br><br><br><br><p>' . htmlspecialchars($aktor['imie_nazwisko']) . '</p>';
+                        echo '<p>' . htmlspecialchars($aktor['imie_nazwisko']) . '</p>';
                         echo '</a></div>';
                     }
                 } else {
