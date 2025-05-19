@@ -1,0 +1,109 @@
+body{
+    margin:0;
+    color:#fff;
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: #333;
+}
+header{/*styl nagłówka*/
+    background-color: #111;
+    width:100%;
+    height:30px;
+    position:fixed;/*element zawsze w tym samym miejscu...*/
+    top: 0;/*...0px od góry*/
+    z-index: 2;/*2 warstwa, wyświetla nad innymi elementami*/
+    overflow: hidden;/*pasek przewijania ukryty*/
+    transition: height 1s ease;/*zmienia wysokość..*/
+
+}
+header:hover{
+    height:100px;/*... na 100px po najechaniu*/
+}
+header section {
+    width:85%;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);/*przesuwa tekst w osi Y(pion) o 20px*/
+    transition: opacity 1s ease, transform 1s ease, visibility 1s;
+    /* zmiana przezroczystosci i lokalizacji w 1s*/
+}
+header:hover section {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+header img {
+    width:20px;
+    height:20px;
+    padding-left:15px;
+    transition: width 1s ease, height 1s ease, padding-top 1s ease, padding-left 1s ease;
+}
+header:hover img {
+    width:50px;
+    height:50px;
+    padding-left:20px;
+    padding-top:20px;
+}
+img, section, h1, h2 {
+    float:left;
+}
+a {
+    margin-right: 5%;
+    color:white;
+    text-decoration: none;
+    float:right;
+}
+header a {
+    position:relative;
+    top:26px;
+    font-size: larger;
+}
+h1{
+    font-size: xx-large;
+    position:relative;
+    bottom:10px;
+}
+main {
+    background-color: #333;
+    position:relative;
+    width:100%;
+    height:600px;
+    top:-50px;
+    z-index: 1;
+    clear:both;
+}
+footer{
+    background-color: #111;
+    width:100%;
+    height:30px;
+    position:fixed;
+    bottom: 0;
+    transition: height 1s ease;
+    z-index: 2;
+    overflow: hidden;
+    clear:both;
+}
+footer:hover{
+    height:100px;
+}
+footer section {
+    width:85%;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 1s ease, transform 1s ease, visibility 1s;
+}
+footer:hover section {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+footer a {
+    position:relative;
+    top:26px;
+    font-size: medium;
+}
+.odstep {
+    margin-right:10%;
+}

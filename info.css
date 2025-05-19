@@ -1,0 +1,195 @@
+.main-lewy {
+    width:400px;
+    height:600px;
+    margin-top:80px;
+    float:left;
+    background-color: #222;
+}
+.main-prawy {
+    width:calc(100% - 400px);
+    height:600px;
+    margin-top:80px;
+    float:left;
+}
+h2{
+    font-size:45px;
+    margin-top:10px;
+    margin-left:10px;
+    margin-bottom:10px;
+}
+td {
+    height:50px;
+}
+h4 {
+    margin:0;
+    font-size:20px;
+    margin-left:10px;
+    float:left;
+}
+div a, h4 a {
+    float:left;
+}
+.row1{
+    height:40px;
+    width:100%;
+}
+.row2 {
+    width:200px;
+    float:left;
+}
+.row3 {
+    margin-top:15px;
+    clear: both;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}/*Styl dla rzędów z informacjami o filmie / aktorze / reżyserze*/
+h5 {
+    font-size:small;
+    vertical-align: bottom;
+}
+.rezyser {/* Styl elementu z imieniem reżysera*/
+    text-align: left;
+    width:33%;
+}
+.gatunek {/* Styl elementu z gatunkiem*/
+    text-align: center;
+    width:33%;
+}
+.popularnosc {/* Styl elementu z popularnoscią*/
+    margin-left:40px;
+    margin-right:20px;
+    margin-top:10px;
+    width:150px;
+    height:100px;
+    text-align: center;
+    vertical-align: baseline;
+    font-size: larger;
+    float:left;
+}
+.miejsce {/* Styl elementu z miejscem na tabeli popularnosci*/
+    transform:translateY(-25px)
+}
+.podtekst {/*Podpis pod popularnością*/
+    transform:translateY(-65px)
+}
+.miejsce, .gwiazdy {
+    font-size:xx-large;
+}.popularnosc, .ocena, .opis {
+    background-color: #444;
+    border-radius: 20px;
+}
+.ocena {/*Styl elementu z oceną*/
+    margin-left:40px;
+    margin-top:10px;
+    width:150px;
+    height:100px;
+    float:left;
+    clear:both;
+}
+.gwiazdy {/*Styl oceny*/
+    text-align: center;
+}
+.opis {/*Życiorys / opis*/
+    margin-top:10px;
+    margin-left:0;
+    float:left;
+    height:auto;
+    min-width:500px;
+    width:70%;
+    margin-bottom: 20px;
+}
+.clearfix {/*przesuniecie rzedu z aktorami pod obraz*/
+    clear: both;
+}
+.opis-tekst{
+    padding:15px;
+    transform:translateY(-15px)
+}
+.aktor {
+    width:150px;
+    height:220px;
+    background-color: #444;
+    float:none;
+    display: inline-block;
+    margin-right: 25px;
+    margin-left:0;
+    border-radius:30px;
+    margin-bottom: 20px;
+} /* styl dla listy występujących autorów*/
+.aktor:first-child {
+    margin-left:40px;/*odstęp pierwszego olementu od obrazu*/
+} 
+.aktor a img {
+    width:150px;
+    height:160px;
+    border-top-left-radius: 30px;
+    border-top-right-radius:30px;
+}
+.aktor a p {
+    margin:10px;
+    font-size: large;
+    font-weight: bold;
+    text-wrap: wrap;
+    transform:translateY(5px)
+}
+.recenzja {/*style recenzji*/
+    background-color: #444;
+    border-radius: 30px;
+    width:370px;
+    height:170px;
+    padding:15px;
+    margin:20px;
+    float:left;
+}
+.recenzja p {
+    margin:0;
+}
+.konto {/* nazwa konta w recenzji */
+    font-weight: bold;
+}
+.opinia { /*opinia w recenzji*/
+    padding-top:5px;
+    line-height: 20px;
+    max-width: 370px;;
+    margin-top: 10px;
+}
+.imie {
+    margin-right:90%;
+}
+/*pola edycyjne recenzji*/
+input ,textarea, select {
+    font-size:medium;
+    height:15px;
+    width:256px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #666;
+    border-radius: 15px;
+    padding:5px;
+    border:2px solid #333;
+    padding-left:15px;
+    color:white;
+    float:left
+}
+textarea {
+    margin-top:5px;
+    height:65px;
+    resize: none;
+}
+input[type="submit"],select {/*zmiana stylu 
+    dla wysłania formularzy i list rozwijanych*/
+    width:370px;
+    height:34px;
+    margin-top:10px;
+    padding-left:15px;
+    text-align: center;
+    color:#fff;
+}
+#przycisk_kup {
+    background-color: #3a3;
+}
+.lstrow {
+    margin-top: 5px;
+}/*odstęp dla pierwszego rzędu*/
+
