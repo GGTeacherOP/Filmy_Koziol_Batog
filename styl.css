@@ -3,28 +3,29 @@ body{
     color:#fff;
     font-family:Arial, Helvetica, sans-serif;
     background-color: #333;
-    overflow-y:scroll
 }
-header{
+header{/*styl nagłówka*/
     background-color: #111;
     width:100%;
     height:30px;
-    position:fixed;
-    top: 0;
-    transition: height 1s ease;
-    z-index: 2;
-    overflow: hidden;
+    position:fixed;/*element zawsze w tym samym miejscu...*/
+    top: 0;/*...0px od góry*/
+    z-index: 2;/*2 warstwa, wyświetla nad innymi elementami*/
+    overflow: hidden;/*pasek przewijania ukryty*/
+    transition: height 1s ease;/*zmienia wysokość..*/
+
 }
 header:hover{
-    height:100px;
+    height:100px;/*... na 100px po najechaniu*/
 }
 header section {
     width:85%;
     padding: 20px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-20px);
+    transform: translateY(-20px);/*przesuwa tekst w osi Y(pion) o 20px*/
     transition: opacity 1s ease, transform 1s ease, visibility 1s;
+    /* zmiana przezroczystosci i lokalizacji w 1s*/
 }
 header:hover section {
     opacity: 1;
@@ -71,8 +72,6 @@ main {
     z-index: 1;
     clear:both;
 }
-
-
 footer{
     background-color: #111;
     width:100%;

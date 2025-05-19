@@ -3,12 +3,12 @@
     height:600px;
     float:left;
     background-color: #222;
-    border-bottom:2px solid #777;
+    border-bottom:2px solid #777;/*Tło, obramowanie i wymiary głównego bloku*/
 }
 .main-lewy img{
     margin:40px;
     width:250px;
-    height:250px;
+    height:250px;/*Ustalenie wymiarów i marginesu dla logo w głównym bloku*/
 }
 .main-lewy h1{
     font-size: 45px;
@@ -20,18 +20,19 @@
     margin-top:0;
     margin-bottom: 20px;
 }
-.main-prawy {
+.main-prawy {/*styl dla bloku prawego*/
     width:65%;
     height:600px;
     float:left;
     background-color: #333;
     border-bottom:2px solid #777;
 }
-.category-title {
+.category-title {/* Użyty dla nazw kategorii*/
     font-size: 35px;
     padding-left:20px;
     padding-right:85%;
     clear:both;
+    text-transform: capitalize;/*Zamienia pierwszej litery na dużą*/
 }
 .film {
     width:170px;
@@ -39,22 +40,20 @@
     background-color: #222;
     border-radius: 30px;
     margin-left:15px;
-    margin-bottom:15px;
+    margin-bottom:15px;/*Styl dla bloków filmów*/
 }
 .film img {
     height:200px;
     width:170px;
     border-top-left-radius:30px;
-    border-top-right-radius:30px;
+    border-top-right-radius:30px;/*zaokrąglenie górnych rogów*/
+
 }
 .film h2 {
     margin-top:15px;
     margin-left:10px;
+    font-size:medium;/*Styl dla tytułów w blokach filmów*/
 }
 .info {
-    float:unset;
-}
-.logo{
-    width: 250px;
-    height: 250px;
+    float:unset;/*styl dla odnośnika w bloku filmu */
 }

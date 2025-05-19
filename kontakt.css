@@ -10,7 +10,7 @@ main {
     height:700px;
     font-size:larger;
 }
-iframe {
+iframe {/*styl dla okna z mapą*/
     margin-top:50px;
     width:100%;
     height:650px;

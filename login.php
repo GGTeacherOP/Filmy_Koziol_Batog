@@ -62,8 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie | Movielock</title>
+    <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="styl.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="login.css"><!-- styl dla stron logowania i rejestracji -->
 </head>
 <body>
     <header>
@@ -79,18 +80,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <section>
             <h2>Logowanie</h2>
-            <?php if(isset($_GET['error'])): ?>
-                <div class="error"><?php echo htmlspecialchars($_GET['error']); ?></div>
-            <?php endif; ?>
             <form action="login.php" method="post">
                 <label for="log">Login: </label><br>
                 <input type="text" name="log" id="log" required><br>
                 <label for="has">Hasło: </label><br>
-                <input type="password" name="has" id="has" required><br>
+                <input type="password" name="has" id="has" required><br><!-- formularz logujący -->
+                <?php if(isset($_GET['error'])): ?><!--Wychwycenie błędu i wypisanie go na stronie-->
+                    <div class="error"><?php echo htmlspecialchars($_GET['error']); ?></div>
+                <?php endif; ?>
                 <input type="submit" value="Zaloguj się" class="submit"><br><br>
             </form>
             <p>Nie masz konta?</p>
-            <a class="zmiana_strony" href="rejestracja.php">Zarejestruj się</a>
+            <a class="zmiana_strony" href="rejestracja.php">Zarejestruj się</a><!-- Przycisk odsyłający na stronę z rejestracją-->
         </section>
     </main>
     <footer>
