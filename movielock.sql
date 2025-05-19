@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 19, 2025 at 06:41 PM
+-- Generation Time: Maj 19, 2025 at 08:10 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -305,7 +305,7 @@ INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`, `wynagrodzenie`) V
 (6, 31, 'moderator', 6300.00),
 (7, 32, 'moderator', 6300.00),
 (8, 33, 'moderator', 6300.00),
-(9, 34, 'admin', 9990.00);
+(9, 34, 'admin', 9770.00);
 
 -- --------------------------------------------------------
 
@@ -701,7 +701,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_aktorzy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ID` AS `id`, `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` DESC LIMIT 0, 20 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ID` AS `id`, `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
 
 -- --------------------------------------------------------
 

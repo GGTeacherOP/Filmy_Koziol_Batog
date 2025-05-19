@@ -11,10 +11,10 @@
     <?php
     require_once 'db_connect.php';
     
-    // Pobranie ID aktora z parametru URL
+    // Pobranie ID rezysera z parametru URL
     $rezyser_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
     
-    // Zapytanie o informacje o aktorze
+    // Zapytanie o informacje o rezyserze
     $query_rezyser = "SELECT * FROM rezyserzy WHERE ID = $rezyser_id";
     $result_rezyser = mysqli_query($conn, $query_rezyser);
     
