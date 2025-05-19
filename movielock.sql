@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 17, 2025 at 04:36 PM
+-- Generation Time: Maj 19, 2025 at 06:41 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -256,8 +256,16 @@ CREATE TABLE `oceny` (
   `ID` int(11) NOT NULL,
   `film_id` int(11) DEFAULT NULL,
   `uzytkownik_id` int(11) DEFAULT NULL,
-  `ocena` int(11) DEFAULT NULL CHECK (`ocena` >= 1 and `ocena` <= 10)
+  `ocena` int(11) DEFAULT NULL CHECK (`ocena` >= 1 and `ocena` <= 10),
+  `opis` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `oceny`
+--
+
+INSERT INTO `oceny` (`ID`, `film_id`, `uzytkownik_id`, `ocena`, `opis`) VALUES
+(1, 1, 1, 3, ' Słaby film');
 
 -- --------------------------------------------------------
 
@@ -297,7 +305,7 @@ INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`, `wynagrodzenie`) V
 (6, 31, 'moderator', 6300.00),
 (7, 32, 'moderator', 6300.00),
 (8, 33, 'moderator', 6300.00),
-(9, 34, 'admin', 9000.00);
+(9, 34, 'admin', 9990.00);
 
 -- --------------------------------------------------------
 
@@ -402,9 +410,26 @@ CREATE TABLE `statusy_filmow` (
   `ID` int(11) NOT NULL,
   `film_id` int(11) DEFAULT NULL,
   `uzytkownik_id` int(11) DEFAULT NULL,
-  `status` enum('nie obejrzane','obejrzane','planowane') DEFAULT 'nie obejrzane',
-  `ulubione` tinyint(1) DEFAULT 0
+  `status` enum('planowane','obejrzane') DEFAULT NULL,
+  `kupione` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `statusy_filmow`
+--
+
+INSERT INTO `statusy_filmow` (`ID`, `film_id`, `uzytkownik_id`, `status`, `kupione`) VALUES
+(4, 23, 1, 'planowane', 1),
+(5, 23, 34, 'obejrzane', 1),
+(7, 71, 1, 'obejrzane', 1),
+(8, 21, 1, NULL, 1),
+(9, 8, 1, NULL, 1),
+(10, 1, 1, 'obejrzane', 1),
+(11, 60, 1, NULL, 1),
+(12, 54, 1, NULL, 1),
+(13, 14, 1, NULL, 1),
+(14, 15, 1, 'planowane', 1),
+(15, 35, 1, 'obejrzane', 1);
 
 -- --------------------------------------------------------
 
@@ -457,17 +482,6 @@ CREATE TABLE `top_rezyserzy` (
 `id` int(11)
 ,`ranking_popularnosci` int(11)
 ,`imie_nazwisko` varchar(255)
-);
-
--- --------------------------------------------------------
-
---
--- Zastąpiona struktura widoku `ulubione_filmy`
--- (See below for the actual view)
---
-CREATE TABLE `ulubione_filmy` (
-`login` varchar(255)
-,`tytul` varchar(255)
 );
 
 -- --------------------------------------------------------
@@ -719,15 +733,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Struktura widoku `ulubione_filmy`
---
-DROP TABLE IF EXISTS `ulubione_filmy`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ulubione_filmy`  AS SELECT `uzytkownicy`.`login` AS `login`, `filmy`.`tytul` AS `tytul` FROM ((`statusy_filmow` join `uzytkownicy` on(`statusy_filmow`.`uzytkownik_id` = `uzytkownicy`.`ID`)) join `filmy` on(`statusy_filmow`.`film_id` = `filmy`.`ID`)) WHERE `statusy_filmow`.`ulubione` = 1 ;
-
--- --------------------------------------------------------
-
---
 -- Struktura widoku `wszyscy_uzytkownicy`
 --
 DROP TABLE IF EXISTS `wszyscy_uzytkownicy`;
@@ -816,7 +821,7 @@ ALTER TABLE `filmy`
 -- AUTO_INCREMENT for table `oceny`
 --
 ALTER TABLE `oceny`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `personel`
@@ -834,13 +839,13 @@ ALTER TABLE `rezyserzy`
 -- AUTO_INCREMENT for table `statusy_filmow`
 --
 ALTER TABLE `statusy_filmow`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `wystapienia`
