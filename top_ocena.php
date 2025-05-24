@@ -43,7 +43,7 @@ session_start();
                 <th class="nazwacol">Nazwa</th>
                 <th class="ocenacol">Ocena</th>
                 <th class="rezcol">Reż.</th>
-            </tr><!-- Rząd nagłówka z klasami dla ustawienia stylów-->
+            </tr>
             <?php
             // Dołączenie pliku z połączeniem do bazy danych
             require_once 'db_connect.php';

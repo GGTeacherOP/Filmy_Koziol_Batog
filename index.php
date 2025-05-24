@@ -20,6 +20,7 @@ while($gatunki_row=mysqli_fetch_array($gatunki_qry)){
 <body>
     <header>
         <img alt="logo" src="logo.png"><!-- Połączenie do pliku ze stylami używanego na kilku stronach -->
+
         <section>
             <h1>Movielock</h1>
             <?php if(isset($_SESSION['user_id'])): ?>
