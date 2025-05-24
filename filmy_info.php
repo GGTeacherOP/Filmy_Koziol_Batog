@@ -160,7 +160,7 @@ session_start();
             </div>
             <?php endif;?>
             <?php
-            if (isset($_POST['ocena']) && isset($_POST['opis']) && isset($_POST['submit']))//Obsługa pisania recenzji pobierająca konto z sesji i reszte z formularzu
+            if (isset($_POST['ocena']) && isset($_POST['opis']) && isset($_POST['submit']))//Obsługa pisania recenzji pobierająca konto z sesji i resztę z formularzu
             {
                 $user_id = (int)$_SESSION['user_id'];
                 $ocena = $_POST['ocena'];

@@ -73,7 +73,7 @@ if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && 
                 $issetlog=true;//Jeżeli nie znajdzie potwierdza login
             }
         }
-    } else {
+    } else {//Pokazanie tekstu z błędem
         echo("<script>document.getElementById('nieok').style.display='initial';</script>");
     }
     $email=$_POST['email'];
