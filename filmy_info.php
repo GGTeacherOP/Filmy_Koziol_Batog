@@ -131,7 +131,7 @@ session_start();
                         case 0://Zmiana statusu na nieobejrzany 
                             $qry_status=mysqli_query($conn, "INSERT INTO `statusy_filmow`(`ID`,`film_id`, `uzytkownik_id`, `status`) VALUES ('".$row_znajdz[0]."','".$_GET['id']."','".$_SESSION['user_id']."','NULL') ON DUPLICATE KEY UPDATE `status`=VALUES(`status`)");
                                                                 // ON DUPLICATE KEY oznacza, że jeśli rekord z tym `ID`, zamiast zwracać błędu, przejdzie do fragmentu po nim,
-                                                                //W tym fragmencie jest tam UPDATE co znaczy że jeżeli nie może stworzyć rekordu, to go uaktualni
+                                                                // W tym fragmencie jest tam UPDATE co znaczy że jeżeli nie może stworzyć rekordu, to go uaktualni
                             break;
                         default://Zmiana statusu na inny 
                             $qry_status=mysqli_query($conn, "INSERT INTO `statusy_filmow`(`ID`,`film_id`, `uzytkownik_id`, `status`) VALUES ('".$row_znajdz[0]."','".$_GET['id']."','".$_SESSION['user_id']."','".$status."') ON DUPLICATE KEY UPDATE `status`=VALUES(`status`)");

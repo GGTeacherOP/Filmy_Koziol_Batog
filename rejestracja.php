@@ -100,7 +100,6 @@ if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && 
         $potw_haslo=true;
         
     }
-    echo("<script>console.log('".$log."');console.log('".$email."');console.log('".$has1."');console.log('".$has2."');console.log('".$potw_haslo."');");
 }
 if ($issetlog && $issetemail && $potw_haslo) {
         $stmt = mysqli_prepare($conn, "INSERT INTO uzytkownicy (login, haslo, rola, email) VALUES (?, ?, 'uzytkownik', ?)");
