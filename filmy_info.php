@@ -162,7 +162,13 @@ session_start();
             <?php
             if (isset($_POST['ocena']) && isset($_POST['opis']) && isset($_POST['submit']))//Obsługa pisania recenzji pobierająca konto z sesji i reszte z formularzu
             {
-                mysqli_query($conn, "INSERT INTO `oceny`(`film_id`, `uzytkownik_id`, `ocena`,`opis`) VALUES ('".$film_id."','".$_SESSION['user_id']."','".$_POST['ocena']."','".$_POST['opis']."')");
+                $user_id = (int)$_SESSION['user_id'];
+                $ocena = $_POST['ocena'];
+                $opis = trim($_POST['opis']);
+                $stmt = mysqli_prepare($conn, "INSERT INTO `oceny` (`film_id`, `uzytkownik_id`, `ocena`, `opis`) VALUES (?, ?, ?, ?)");
+                mysqli_stmt_bind_param($stmt, "iids", $film_id, $user_id, $ocena, $opis);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
             }
             //Pokazanie recenzji
             $result_recenzje = mysqli_query($conn, "SELECT login,ocena,opis FROM oceny JOIN uzytkownicy ON oceny.uzytkownik_id=uzytkownicy.ID WHERE film_id='".$film_id."';");
