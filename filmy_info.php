@@ -135,7 +135,7 @@ session_start();
                         case 0://Zmiana statusu na nieobejrzany 
                             $qry_status=mysqli_query($conn, "INSERT INTO `statusy_filmow`(`ID`,`film_id`, `uzytkownik_id`, `status`) VALUES ('".$row_znajdz[0]."','".$_GET['id']."','".$_SESSION['user_id']."','NULL') ON DUPLICATE KEY UPDATE `status`=VALUES(`status`)");
                                                                 // ON DUPLICATE KEY oznacza, że jeśli rekord z tym `ID`, zamiast zwracać błędu, przejdzie do fragmentu po nim,
-                                                                //W tym fragmencie jest tam UPDATE co znaczy że jeżeli nie może stworzyć rekordu, to go uaktualni
+                                                                // W tym fragmencie jest tam UPDATE co znaczy że jeżeli nie może stworzyć rekordu, to go uaktualni
                             break;
                         default://Zmiana statusu na inny 
                             $qry_status=mysqli_query($conn, "INSERT INTO `statusy_filmow`(`ID`,`film_id`, `uzytkownik_id`, `status`) VALUES ('".$row_znajdz[0]."','".$_GET['id']."','".$_SESSION['user_id']."','".$status."') ON DUPLICATE KEY UPDATE `status`=VALUES(`status`)");
@@ -161,9 +161,15 @@ session_start();
             </div>
             <?php endif;?>
             <?php
-            if (isset($_POST['ocena']) && isset($_POST['opis']) && isset($_POST['submit']))//Obsługa pisania recenzji pobierająca konto z sesji i reszte z formularzu
+            if (isset($_POST['ocena']) && isset($_POST['opis']) && isset($_POST['submit']))//Obsługa pisania recenzji pobierająca konto z sesji i resztę z formularzu
             {
-                mysqli_query($conn, "INSERT INTO `oceny`(`film_id`, `uzytkownik_id`, `ocena`,`opis`) VALUES ('".$film_id."','".$_SESSION['user_id']."','".$_POST['ocena']."','".$_POST['opis']."')");
+                $user_id = (int)$_SESSION['user_id'];
+                $ocena = $_POST['ocena'];
+                $opis = trim($_POST['opis']);
+                $stmt = mysqli_prepare($conn, "INSERT INTO `oceny` (`film_id`, `uzytkownik_id`, `ocena`, `opis`) VALUES (?, ?, ?, ?)");
+                mysqli_stmt_bind_param($stmt, "iids", $film_id, $user_id, $ocena, $opis);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
             }
             //Pokazanie recenzji
             $result_recenzje = mysqli_query($conn, "SELECT login,ocena,opis FROM oceny JOIN uzytkownicy ON oceny.uzytkownik_id=uzytkownicy.ID WHERE film_id='".$film_id."';");
