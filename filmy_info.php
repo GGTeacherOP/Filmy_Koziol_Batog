@@ -82,6 +82,9 @@ session_start();
                 <div class="ocena"><h5 class="gwiazdy"><?php echo htmlspecialchars($film['srednia_ocena']); ?></h5></div>
             </section>
             <div class="opis"><h5 class="opis-tekst"><?php echo htmlspecialchars($film['opis']); ?></h5></div>
+            <form method="post" style="float:right;">
+                <input id="przycisk_kup" type="submit" name="kup" value="Kup">
+            </form><!-- formularz kupna filmu -->
             <div class="clearfix"></div>
             <section class="row3">
                 <?php
@@ -113,6 +116,7 @@ session_start();
                 if (mysqli_num_rows($qry_sprawdz_kupiony)>0){//Jeżeli tak
                     echo "<script>document.getElementById('przycisk_kup').value='kupione'</script>";
                     echo "<script>document.getElementById('przycisk_kup').style.backgroundColor='#444'</script>";
+                    echo "<script>document.getElementById('przycisk_kup').disabled='disabled'</script>";
                 }
                 if (isset($_POST['kup'])){// Jeżeli kliknięto pzrycisk zakupu
                     $qry_znajdz=mysqli_query($conn, "SELECT id FROM `statusy_filmow` WHERE `film_id`='".$_GET['id']."' AND `uzytkownik_id`='".$_SESSION['user_id']."';");
