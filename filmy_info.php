@@ -172,7 +172,7 @@ session_start();
                 mysqli_stmt_close($stmt);
             }
             //Pokazanie recenzji
-            $result_recenzje = mysqli_query($conn, "SELECT login,ocena,opis FROM oceny JOIN uzytkownicy ON oceny.uzytkownik_id=uzytkownicy.ID WHERE film_id='".$film_id."';");
+            $result_recenzje = mysqli_query($conn, "SELECT login,ocena,opis FROM oceny JOIN uzytkownicy ON oceny.uzytkownik_id=uzytkownicy.ID WHERE film_id='".$film_id."' AND potwierdzone='zaakceptowane';");
             
             if (mysqli_num_rows($result_recenzje)==0){
                 echo "<p style='float:left'>Brak recenzji do wyświetlenia</p>";

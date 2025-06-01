@@ -11,6 +11,21 @@ $con=mysqli_connect("localhost","root","","movielock");
         <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="styl.css">
     <link rel="stylesheet" href="panel.css">
+    <style>
+        input {
+            background-color: #aaa;
+            border:1px solid black;
+            border-radius: 10px;
+            padding:2px;
+            padding-left: 8px;
+            padding-right: 8px;
+            text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+            color:white;
+        }
+        .outline_txt {
+            text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+        }
+    </style>
     <script>
         function redirecttab(x){
             window.open("admin_panel.php?mode=table&tab="+x, '_self').focus();
@@ -68,7 +83,7 @@ $con=mysqli_connect("localhost","root","","movielock");
             <td onclick="redirecttab('personel')">personel</td>
         </tr>
         <tr>
-            <td class="category" onclick="redirectvie('oceny_uzytkownikow')"rowspan="4">Widoki</td>
+            <td class="category" onclick="redirectvie('oceny_uzytkownikow')" rowspan="4">Widoki</td>
             <td onclick="redirecttab('rezyserzy')">reżyserzy</td>
         </tr>
         <tr>
@@ -114,18 +129,64 @@ $con=mysqli_connect("localhost","root","","movielock");
     </table>
     </div>
     <?php endif; ?>
-                    <table class="display_table">
-                    <?php 
-                        if (!isset($_GET['mode'])){
-                            $mode="table";
-                        } else {
-                            $mode=$_GET['mode'];
-                        }
-                        if (!isset($_GET['tab'])){
-                            $tab="aktorzy";
-                        } else {
-                            $tab=$_GET['tab'];
-                        }
+    <table class="display_table" id="input_table" style="margin-bottom:20px;">
+        <tr><td colspan="9">Wstaw</td></tr>
+        <tr>                    
+            <?php 
+                if (!isset($_GET['mode'])){
+                    $mode="table";
+                } else {
+                    $mode=$_GET['mode'];
+                }
+                
+                if (!isset($_GET['tab'])){
+                    $tab="aktorzy";
+                } else {
+                    $tab=$_GET['tab'];
+                }
+
+
+            
+                switch($tab){
+                    case 'aktorzy':
+                        echo "<td>Imię i nazwisko</td><td>Zdjęcie</td><td>Ranking popularności</td><td>Życiorys</td><td>Ocena</td></tr>";
+                        echo "<form method='post'><tr><td><input type='text' name='input1' maxlength='100'></td><td><input type='text' name='input2' maxlength='255'></td><td><input type='number' name='input3' maxlength='11'></td><td><input type='text' name='input4' maxlength='5000'></td><td><input type='number' name='input5' step='0.01' max='10' min='0'></td>";
+                        break;
+                    case 'filmy':
+                        echo "<td>Tytuł</td><td>Zdjęcie</td><td>Gatunek</td><td>Typ</td><td>Id_reżysera</td><td>Opis</td><td>Średnia ocena</td><td>Ranking</td></tr>";
+                        break;
+                    case 'oceny':
+                        echo "<td>Id filmu</td><td>Id użytkownika</td><td>Ocena</td><td>Opis</td><td>Potwierdzone</td></tr>";
+                        break;
+                    case 'personel':
+                        echo "<td>Id użytkownika</td><td>Uprawnienia</td><td>Wynagrodzenie</td></tr>";
+                        break;
+                    case 'rezyserzy':
+                        echo "<td>Imię i nazwisko</td><td>Zdjęcie</td><td>Ranking popularności</td><td>zyciorys</td><td>Ocena</td></tr>";
+                        break;
+                    case 'statusy_filmow':
+                        echo "<td>Id filmu</td><td>Id użytkownika</td><td>Status</td><td>Kupione</td></tr>";
+                        break;
+                    case 'uzytkownicy':
+                        echo "<td>Login</td><td>Hasło</td><td>Rola</td><td>Email</td></tr>";
+                        break;
+                    case 'wystapienia':
+                        echo "<td>Id filmu</td><td>Id aktora</td></tr>";
+                        break;
+                    default:
+                        echo "<script>document.getElementById('input_table').style.display='none'</script>";
+                        break;
+                }
+
+            ?>
+        </tr>
+        <tr>
+            <td colspan="9"><input type='submit' style="color:white;float:right;" value="Wyślij" class="outline_txt"></td></form>
+        </tr>
+    </table>
+    <table class="display_table">
+        <?php
+
                     $qry=mysqli_query($con, "SELECT * FROM ".$tab);
                     $cols=mysqli_field_count($con);
                     $qry2=mysqli_query($con, "DESCRIBE ".$tab);
@@ -144,7 +205,7 @@ $con=mysqli_connect("localhost","root","","movielock");
                                     echo "<td>".$row[$i]."</td>";
                                 }
                             }
-                        echo"</tr>";
+                        echo"<td><a style='float:unset;' href='edycja.php'>Edytuj</a><br><a style='float:unset;' href='usun.php'>Usuń</a></td></tr>";
                         }
                     } else {
                         echo "<td style='padding:15px;'>Brak informacji do wyświetlenia...</td>";
