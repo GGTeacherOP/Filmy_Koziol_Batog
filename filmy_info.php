@@ -1,5 +1,60 @@
 <?php
 session_start();
+require_once 'db_connect.php';
+
+// Pobierz ID filmu z parametru URL
+$film_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
+
+// Obsługa dodawania do koszyka
+if (isset($_GET['dodaj_do_koszyka']) && isset($_SESSION['user_id'])) {    
+    // Sprawdź czy film istnieje
+    $check_movie = mysqli_prepare($conn, "SELECT ID FROM filmy WHERE ID = ?");
+    mysqli_stmt_bind_param($check_movie, "i", $film_id);
+    mysqli_stmt_execute($check_movie);
+    mysqli_stmt_store_result($check_movie);
+    
+    if (mysqli_stmt_num_rows($check_movie) > 0) {
+        // Sprawdź czy film już jest w koszyku
+        $check_cart = mysqli_prepare($conn, "SELECT * FROM koszyk WHERE uzytkownik_id = ? AND film_id = ?");
+        mysqli_stmt_bind_param($check_cart, "ii", $_SESSION['user_id'], $film_id);
+        mysqli_stmt_execute($check_cart);
+        mysqli_stmt_store_result($check_cart);
+        
+        if (mysqli_stmt_num_rows($check_cart) == 0) {
+            // Dodaj film do koszyka
+            $query = "INSERT INTO koszyk (uzytkownik_id, film_id) VALUES (?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "ii", $_SESSION['user_id'], $film_id);
+            mysqli_stmt_execute($stmt);
+        }
+    }
+    
+    // Przekieruj z powrotem aby uniknąć ponownego wysłania formularza
+    header("Location: filmy_info.php?id=" . $film_id);
+    exit();
+}
+
+// Zapytanie o informacje o filmie
+$query_film = "SELECT f.*, r.imie_nazwisko AS rezyser , r.ID AS id_rezysera
+              FROM filmy f 
+              JOIN rezyserzy r ON f.rezyser_id = r.ID 
+              WHERE f.ID = $film_id";
+$result_film = mysqli_query($conn, $query_film);
+
+if (!$result_film || mysqli_num_rows($result_film) == 0) {
+    die("Film nie znaleziony");
+}
+
+$film = mysqli_fetch_assoc($result_film);
+
+// Zapytanie o aktorów w filmie (ograniczone do 5)
+$query_aktorzy = "SELECT a.ID, a.imie_nazwisko, a.zdjecie 
+                 FROM aktorzy a
+                 JOIN wystapienia w ON a.ID = w.id_aktora
+                 WHERE w.id_filmu = $film_id
+                 LIMIT 5";
+$result_aktorzy = mysqli_query($conn, $query_aktorzy);
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -12,35 +67,6 @@ session_start();
     <link rel="stylesheet" href="info.css"><!-- styl dla stron *_info.php-->
 </head>
 <body>
-    <?php
-    require_once 'db_connect.php';
-    
-    // Pobierz ID filmu z parametru URL
-    $film_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
-    
-    // Zapytanie o informacje o filmie
-    $query_film = "SELECT f.*, r.imie_nazwisko AS rezyser , r.ID AS id_rezysera
-                  FROM filmy f 
-                  JOIN rezyserzy r ON f.rezyser_id = r.ID 
-                  WHERE f.ID = $film_id";
-    $result_film = mysqli_query($conn, $query_film);
-    
-    if (!$result_film || mysqli_num_rows($result_film) == 0) {
-        die("Film nie znaleziony");
-    }
-    
-    $film = mysqli_fetch_assoc($result_film);
-    
-    // Zapytanie o aktorów w filmie (ograniczone do 5)
-    $query_aktorzy = "SELECT a.ID, a.imie_nazwisko, a.zdjecie 
-                     FROM aktorzy a
-                     JOIN wystapienia w ON a.ID = w.id_aktora
-                     WHERE w.id_filmu = $film_id
-                     LIMIT 5";
-    $result_aktorzy = mysqli_query($conn, $query_aktorzy);
-    
-    ?>
-    
     <header>
         <img alt="logo" src="logo.png">
         <section>
@@ -55,6 +81,7 @@ session_start();
                     }
                 ?>" class="odstep">Moje konto</a>
                 <a href="logout.php">Wyloguj</a>
+                <a href="koszyk.php" class="odstep">Koszyk</a>
             <?php else: ?>
                 <a href="login.php" class="odstep">Logowanie</a>
             <?php endif; ?>
@@ -82,9 +109,12 @@ session_start();
                 <div class="ocena"><h5 class="gwiazdy"><?php echo htmlspecialchars($film['srednia_ocena']); ?></h5></div>
             </section>
             <div class="opis"><h5 class="opis-tekst"><?php echo htmlspecialchars($film['opis']); ?></h5></div>
-            <form method="post" style="float:right;">
-                <input id="przycisk_kup" type="submit" name="kup" value="Kup">
-            </form><!-- formularz kupna filmu -->
+            <?php if(isset($_SESSION['user_id'])): ?>
+                <form method="get" style="float:right;">
+                    <input type="hidden" name="id" value="<?php echo $film_id; ?>">
+                    <input type="submit" name="dodaj_do_koszyka" value="Dodaj do koszyka" value="<?php echo $film_id; ?>">
+                </form>
+            <?php endif; ?>
             <div class="clearfix"></div>
             <section class="row3">
                 <?php
@@ -102,7 +132,7 @@ session_start();
                 <form method="post" style="float:right;">
                     <select name="status">
                         <option hidden>--Wybierz--</option>
-                        <option value="0">Nieobejrzany</option> 
+                        <option value="0">Nieobejrzany</option>     
                         <option value="obejrzane">Obejrzany</option>     
                         <option value="planowane">Planuje obejrzeć</option> 
                     </select><br>
@@ -113,35 +143,35 @@ session_start();
                 $qry_sprawdz_kupiony=mysqli_query($conn, "SELECT `kupione` FROM `statusy_filmow` WHERE `film_id`='".$_GET['id']."' AND `uzytkownik_id`='".$_SESSION['user_id']."';");
                 //Sprawdzenie czy kupił wybrany film
 
-                if (mysqli_num_rows($qry_sprawdz_kupiony)>0){//Jeżeli tak
-                    echo "<script>document.getElementById('przycisk_kup').value='kupione'</script>";
-                    echo "<script>document.getElementById('przycisk_kup').style.backgroundColor='#444'</script>";
-                    echo "<script>document.getElementById('przycisk_kup').disabled='disabled'</script>";
-                }
-                if (isset($_POST['kup'])){// Jeżeli kliknięto pzrycisk zakupu
-                    $qry_znajdz=mysqli_query($conn, "SELECT id FROM `statusy_filmow` WHERE `film_id`='".$_GET['id']."' AND `uzytkownik_id`='".$_SESSION['user_id']."';");
-                    $row_znajdz=mysqli_fetch_array($qry_znajdz);
-                    if (mysqli_num_rows($qry_znajdz)>0){//Sprawdzenie czy zmieniono status filmu przed zakupem
-                    mysqli_query($conn, "INSERT INTO `statusy_filmow`(`ID`,`film_id`, `uzytkownik_id`, `kupione`) VALUES ('".$row_znajdz[0]."','".$_GET['id']."','".$_SESSION['user_id']."','1') ON DUPLICATE KEY UPDATE `kupione`=VALUES(kupione)");
-                } else {
-                    mysqli_query($conn, "INSERT INTO `statusy_filmow`(`film_id`, `uzytkownik_id`, `kupione`) VALUES ('".$_GET['id']."','".$_SESSION['user_id']."','1')");
-                }
-            }
-                if (isset($_POST['status']) && isset($_POST['zmien_status'])){
-                    $status=$_POST['status'];
-                    $qry_znajdz=mysqli_query($conn, "SELECT id FROM `statusy_filmow` WHERE `film_id`='".$_GET['id']."' AND `uzytkownik_id`='".$_SESSION['user_id']."';");
-                    $row_znajdz=mysqli_fetch_array($qry_znajdz);
-                    switch ($status){
-                        case 0://Zmiana statusu na nieobejrzany 
-                            $qry_status=mysqli_query($conn, "INSERT INTO `statusy_filmow`(`ID`,`film_id`, `uzytkownik_id`, `status`) VALUES ('".$row_znajdz[0]."','".$_GET['id']."','".$_SESSION['user_id']."','NULL') ON DUPLICATE KEY UPDATE `status`=VALUES(`status`)");
-                                                                // ON DUPLICATE KEY oznacza, że jeśli rekord z tym `ID`, zamiast zwracać błędu, przejdzie do fragmentu po nim,
-                                                                // W tym fragmencie jest tam UPDATE co znaczy że jeżeli nie może stworzyć rekordu, to go uaktualni
-                            break;
-                        default://Zmiana statusu na inny 
-                            $qry_status=mysqli_query($conn, "INSERT INTO `statusy_filmow`(`ID`,`film_id`, `uzytkownik_id`, `status`) VALUES ('".$row_znajdz[0]."','".$_GET['id']."','".$_SESSION['user_id']."','".$status."') ON DUPLICATE KEY UPDATE `status`=VALUES(`status`)");
-                            break;
-                    }
-                }
+                if (isset($_POST['status']) && isset($_POST['zmien_status'])) {
+    $film_id = intval($_GET['id']); // Upewnij się, że film_id jest liczbą całkowitą
+    $user_id = $_SESSION['user_id']; // ID użytkownika z sesji
+
+    // Pobierz wartość statusu z POST
+    $status_value = $_POST['status'];
+
+    // Jeśli status jest 0, ustaw go na NULL (w MySQL 'NULL' to nie to samo co string 'NULL')
+    $status_do_zapisu = ($status_value == 0) ? NULL : $status_value;
+
+    // Zapytanie SQL z ON DUPLICATE KEY UPDATE, bez podawania ID i bez $qry_znajdz
+    $query = "INSERT INTO `statusy_filmow` (`film_id`, `uzytkownik_id`, `status`)
+              VALUES (?, ?, ?)
+              ON DUPLICATE KEY UPDATE `status` = VALUES(`status`)";
+
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "iis", $film_id, $user_id, $status_do_zapisu);
+        
+        if (mysqli_stmt_execute($stmt)) {
+        } else {
+            error_log("Błąd podczas aktualizacji statusu filmu: " . mysqli_stmt_error($stmt));
+        }
+        mysqli_stmt_close($stmt);
+    } else {
+        error_log("Błąd przygotowania zapytania SQL dla statusu: " . mysqli_error($conn));
+    }
+}
                 }
                 ?>    
             </section>

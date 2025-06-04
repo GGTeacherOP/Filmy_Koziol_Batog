@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 19, 2025 at 08:10 PM
+-- Generation Time: Cze 04, 2025 at 08:03 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -249,6 +249,18 @@ INSERT INTO `filmy` (`ID`, `tytul`, `zdjecie`, `gatunek`, `typ`, `rezyser_id`, `
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `koszyk`
+--
+
+CREATE TABLE `koszyk` (
+  `id` int(11) NOT NULL,
+  `uzytkownik_id` int(11) NOT NULL,
+  `film_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `oceny`
 --
 
@@ -256,16 +268,18 @@ CREATE TABLE `oceny` (
   `ID` int(11) NOT NULL,
   `film_id` int(11) DEFAULT NULL,
   `uzytkownik_id` int(11) DEFAULT NULL,
-  `ocena` int(11) DEFAULT NULL CHECK (`ocena` >= 1 and `ocena` <= 10),
-  `opis` text DEFAULT NULL
+  `ocena` decimal(11,1) DEFAULT NULL,
+  `opis` text DEFAULT NULL,
+  `potwierdzone` enum('niezaakceptowane','zaakceptowane') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oceny`
 --
 
-INSERT INTO `oceny` (`ID`, `film_id`, `uzytkownik_id`, `ocena`, `opis`) VALUES
-(1, 1, 1, 3, ' Słaby film');
+INSERT INTO `oceny` (`ID`, `film_id`, `uzytkownik_id`, `ocena`, `opis`, `potwierdzone`) VALUES
+(1, 1, 1, 3.0, ' Słaby film', 'zaakceptowane'),
+(2, 1, 1, 1.2, 'po ponownym obejrzeniu jest jeszcze gorszy niż go pamiętałem', 'niezaakceptowane');
 
 -- --------------------------------------------------------
 
@@ -276,7 +290,7 @@ INSERT INTO `oceny` (`ID`, `film_id`, `uzytkownik_id`, `ocena`, `opis`) VALUES
 CREATE TABLE `oceny_uzytkownikow` (
 `login` varchar(255)
 ,`tytul` varchar(255)
-,`ocena` int(11)
+,`ocena` decimal(11,1)
 );
 
 -- --------------------------------------------------------
@@ -305,7 +319,7 @@ INSERT INTO `personel` (`ID`, `uzytkownik_id`, `uprawnienia`, `wynagrodzenie`) V
 (6, 31, 'moderator', 6300.00),
 (7, 32, 'moderator', 6300.00),
 (8, 33, 'moderator', 6300.00),
-(9, 34, 'admin', 9770.00);
+(9, 34, 'admin', 10400.00);
 
 -- --------------------------------------------------------
 
@@ -429,7 +443,39 @@ INSERT INTO `statusy_filmow` (`ID`, `film_id`, `uzytkownik_id`, `status`, `kupio
 (12, 54, 1, NULL, 1),
 (13, 14, 1, NULL, 1),
 (14, 15, 1, 'planowane', 1),
-(15, 35, 1, 'obejrzane', 1);
+(15, 35, 1, 'obejrzane', 1),
+(16, 10, 1, NULL, 1),
+(17, 57, 1, NULL, 1),
+(18, 13, 1, NULL, 1),
+(19, 100, 1, NULL, 1),
+(20, 17, 1, NULL, 1),
+(21, 18, 1, NULL, 1),
+(22, 86, 1, 'obejrzane', 1),
+(23, 44, 1, NULL, 1),
+(24, 43, 1, 'obejrzane', NULL),
+(25, 32, 1, NULL, 1),
+(28, 52, 1, 'obejrzane', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `statystyki_systemu`
+--
+
+CREATE TABLE `statystyki_systemu` (
+  `id` int(11) NOT NULL,
+  `liczba_uzytkownikow` int(11) DEFAULT NULL,
+  `liczba_produkcji` int(11) DEFAULT NULL,
+  `liczba_aktorow` int(11) DEFAULT NULL,
+  `liczba_rezyserow` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `statystyki_systemu`
+--
+
+INSERT INTO `statystyki_systemu` (`id`, `liczba_uzytkownikow`, `liczba_produkcji`, `liczba_aktorow`, `liczba_rezyserow`) VALUES
+(1, 25, 100, 80, 72);
 
 -- --------------------------------------------------------
 
@@ -494,7 +540,7 @@ CREATE TABLE `uzytkownicy` (
   `ID` int(11) NOT NULL,
   `login` varchar(255) NOT NULL,
   `haslo` varchar(255) NOT NULL,
-  `rola` enum('uzytkownik','moderator','edytor','admin') NOT NULL,
+  `rola` enum('uzytkownik','moderator','edytor','admin','wlasciciel') DEFAULT NULL,
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -536,7 +582,8 @@ INSERT INTO `uzytkownicy` (`ID`, `login`, `haslo`, `rola`, `email`) VALUES
 (31, 'moderator1', 'haslo6666', 'moderator', 'moderator1@x.pl'),
 (32, 'moderator2', 'haslo7777', 'moderator', 'moderator2@x.pl'),
 (33, 'moderator3', 'haslo8888', 'moderator', 'moderator3@x.pl'),
-(34, 'admin', 'haslo9999', 'admin', 'admin@x.pl');
+(34, 'admin', 'haslo9999', 'admin', 'admin@x.pl'),
+(35, 'wlasciciel', 'haslo0000', 'wlasciciel', 'wlasciciel@x.pl');
 
 -- --------------------------------------------------------
 
@@ -576,7 +623,7 @@ INSERT INTO `wystapienia` (`id`, `id_filmu`, `id_aktora`) VALUES
 (55, 4, 60),
 (8, 5, 73),
 (9, 6, 3),
-(56, 7, 77),
+(56, 7, 10),
 (11, 8, 11),
 (10, 8, 12),
 (12, 8, 66),
@@ -701,7 +748,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `top_aktorzy`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ID` AS `id`, `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` ASC LIMIT 0, 20 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_aktorzy`  AS SELECT `aktorzy`.`ID` AS `id`, `aktorzy`.`ranking_popularnosci` AS `ranking_popularnosci`, `aktorzy`.`imie_nazwisko` AS `imie_nazwisko` FROM `aktorzy` ORDER BY `aktorzy`.`ranking_popularnosci` DESC LIMIT 0, 20 ;
 
 -- --------------------------------------------------------
 
@@ -757,6 +804,14 @@ ALTER TABLE `filmy`
   ADD KEY `rezyser_id` (`rezyser_id`);
 
 --
+-- Indeksy dla tabeli `koszyk`
+--
+ALTER TABLE `koszyk`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `uzytkownik_id` (`uzytkownik_id`),
+  ADD KEY `film_id` (`film_id`);
+
+--
 -- Indeksy dla tabeli `oceny`
 --
 ALTER TABLE `oceny`
@@ -782,8 +837,15 @@ ALTER TABLE `rezyserzy`
 --
 ALTER TABLE `statusy_filmow`
   ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `idx_unique_film_user` (`film_id`,`uzytkownik_id`),
   ADD KEY `film_id` (`film_id`),
   ADD KEY `uzytkownik_id` (`uzytkownik_id`);
+
+--
+-- Indeksy dla tabeli `statystyki_systemu`
+--
+ALTER TABLE `statystyki_systemu`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `uzytkownicy`
@@ -818,10 +880,16 @@ ALTER TABLE `filmy`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
+-- AUTO_INCREMENT for table `koszyk`
+--
+ALTER TABLE `koszyk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `oceny`
 --
 ALTER TABLE `oceny`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personel`
@@ -839,13 +907,19 @@ ALTER TABLE `rezyserzy`
 -- AUTO_INCREMENT for table `statusy_filmow`
 --
 ALTER TABLE `statusy_filmow`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `statystyki_systemu`
+--
+ALTER TABLE `statystyki_systemu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `wystapienia`
@@ -862,6 +936,13 @@ ALTER TABLE `wystapienia`
 --
 ALTER TABLE `filmy`
   ADD CONSTRAINT `filmy_ibfk_1` FOREIGN KEY (`rezyser_id`) REFERENCES `rezyserzy` (`ID`);
+
+--
+-- Constraints for table `koszyk`
+--
+ALTER TABLE `koszyk`
+  ADD CONSTRAINT `koszyk_ibfk_1` FOREIGN KEY (`uzytkownik_id`) REFERENCES `uzytkownicy` (`ID`),
+  ADD CONSTRAINT `koszyk_ibfk_2` FOREIGN KEY (`film_id`) REFERENCES `filmy` (`ID`);
 
 --
 -- Constraints for table `oceny`
