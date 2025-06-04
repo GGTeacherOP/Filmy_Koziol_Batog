@@ -33,6 +33,7 @@ while($gatunki_row=mysqli_fetch_array($gatunki_qry)){
                     }
                 ?>" class="odstep">Moje konto</a>
                 <a href="logout.php">Wyloguj</a>
+                <a href="koszyk.php" class="odstep">Koszyk</a>
             <?php else: ?>
                 <a href="login.php" class="odstep">Logowanie</a><!-- W przypadku braku, wypisanie odnośnika do logowania -->
             <?php endif; ?>

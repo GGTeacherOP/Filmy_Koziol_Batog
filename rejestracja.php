@@ -49,7 +49,7 @@
     <footer>
         <section>
             <h1>Movielock</h1>
-            <a href="kontakt.php">Kontakt</a>
+            <a href="kontakt.html">Kontakt</a>
         </section>
     </footer>
 </body>
@@ -58,7 +58,8 @@
 $issetlog=false;//Ustawienie zmiennych potwierdzających prawidłowość danych
 $issetemail=false;
 $potw_haslo=false;
-$qry=mysqli_query(mysqli_connect("localhost","root","","movielock"),"SELECT login FROM uzytkownicy;");
+$conn=mysqli_connect("localhost","root","","movielock");
+$qry=mysqli_query($conn,"SELECT login FROM uzytkownicy;");
 
 if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && isset($_POST['has1']) && isset($_POST['has2'])){
     $log=$_POST['log'];
@@ -72,7 +73,7 @@ if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && 
                 $issetlog=true;//Jeżeli nie znajdzie potwierdza login
             }
         }
-    } else {
+    } else {//Pokazanie tekstu z błędem
         echo("<script>document.getElementById('nieok').style.display='initial';</script>");
     }
     $email=$_POST['email'];
@@ -99,10 +100,15 @@ if(isset($_POST['submit']) && isset($_POST['log']) && isset($_POST['email']) && 
         $potw_haslo=true;
         
     }
-    echo("<script>console.log('".$log."');console.log('".$email."');console.log('".$has1."');console.log('".$has2."');console.log('".$potw_haslo."');");
 }
-if ($issetlog && $issetemail && $potw_haslo){//Jeżeli wszystko się zgadza, tworzy użytkownika
-    $qry = mysqli_query(mysqli_connect("localhost","root","","movielock"), "INSERT INTO `uzytkownicy`(`login`, `haslo`, `rola`, `email`) VALUES ('".$log."','".$has_potw."','uzytkownik','".$email."')");
-    header('Location: login.php');
-}
+if ($issetlog && $issetemail && $potw_haslo) {
+        $stmt = mysqli_prepare($conn, "INSERT INTO uzytkownicy (login, haslo, rola, email) VALUES (?, ?, 'uzytkownik', ?)");
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "sss", $log, $has_potw, $email);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            header('Location: login.php');
+            exit();
+        }
+    }
 ?>
