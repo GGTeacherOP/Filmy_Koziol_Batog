@@ -1,6 +1,6 @@
 .main_table {/*Główna tabela z wyborem tabeli i wodoków*/
     background-color: #555;
-    width:550px;
+    width:450px;
     margin-left: 1%;
 }
 .display_table {/*Tabela pokazująca zawartość tabeli/widoku*/
@@ -40,4 +40,7 @@ td, th {
 }
 a{
     text-decoration: underline;
+}
+input[type="number"]{
+    width:50px;
 }

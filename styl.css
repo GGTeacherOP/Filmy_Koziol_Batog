@@ -107,3 +107,97 @@ footer a {
 .odstep {
     margin-right:10%;
 }
+
+.koszyk-container {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 5%;
+}
+
+.koszyk-link {
+    cursor: pointer;
+}
+
+.koszyk-menu {
+    display: none;
+    position: absolute;
+    background-color: #111;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+    padding: 12px;
+    right: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.koszyk-menu h3 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.koszyk-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.koszyk-menu li {
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.koszyk-menu li img {
+    width: 50px;
+    height: 75px;
+    margin-right: 10px;
+}
+
+.koszyk-menu .film-info {
+    display: flex;
+    align-items: center;
+}
+
+.koszyk-menu .usun-film {
+    color: #ff4444;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.koszyk-menu .przyciski-koszyka {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.koszyk-menu .przyciski-koszyka input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.koszyk-menu .przyciski-koszyka input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.koszyk-menu .przyciski-koszyka a {
+    background-color: #555;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+.koszyk-menu .przyciski-koszyka a:hover {
+    background-color: #666;
+}
+
+.koszyk-pusty {
+    color: #aaa;
+    padding: 10px;
+}

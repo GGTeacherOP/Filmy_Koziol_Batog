@@ -11,6 +11,21 @@ $con=mysqli_connect("localhost","root","","movielock");
     <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="styl.css">
     <link rel="stylesheet" href="panel.css"><!--styl dla panelów-->
+        <style>
+        input, select {
+            background-color: #aaa;
+            border:1px solid black;
+            border-radius: 10px;
+            padding:2px;
+            padding-left: 8px;
+            padding-right: 8px;
+            text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+            color:white;
+        }
+        .outline_txt {
+            text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+        }
+    </style>
     <script>
         function redirecttab(x){
             window.open("moderator_panel.php?mode=table&tab="+x, '_self').focus();
@@ -90,7 +105,9 @@ $con=mysqli_connect("localhost","root","","movielock");
     </table>
     </div>
     <?php endif; ?>
-                    <table class="display_table"><!--skrypt tabeli wyświetlającej dane-->
+    <table class="display_table" id="input_table" style="margin-bottom:20px;"><!--skrypt tabeli wyświetlającej dane-->
+         <tr><td colspan="9">Wstaw</td></tr>
+         <tr>
                     <?php 
                         if (!isset($_GET['mode'])){
                             $mode="table";//jeżeli nie jest ustawione, ustaw domyślne
@@ -102,9 +119,54 @@ $con=mysqli_connect("localhost","root","","movielock");
                         } else {
                             $tab=$_GET['tab'];
                         }
-                    $qry=mysqli_query($con, "SELECT * FROM ".$tab);//Zapytanie biorące wszystkie dane z wybranej tabeli
+
+                        switch($tab){
+                    case 'oceny':
+                        echo "<td>Id filmu</td><td>Id użytkownika</td><td>Ocena</td><td>Opis</td><td>Potwierdzone</td></tr>";
+                        echo "<form method='post'><tr><td><input type='number' name='input1' maxlength='11' min='1'></td><td><input type='number' name='input2' maxlength='11' min='1'></td><td><input type='number' name='input3' step='0.1' max='10' min='1'></td><td><input type='text' name='input4' maxlength='5000'></td><td><select name='input5'><option value='niezaakceptowane'>Niezaakceptowane</option><option value='zaakceptowane'>Zaakceptowane</option></select></td>";
+                        break;
+                    case 'statusy_filmow':
+                        echo "<td>Id filmu</td><td>Id użytkownika</td><td>Status</td><td>Kupione</td></tr>";
+                        echo "<form method='post'><tr><td><input type='number' name='input1' maxlength='11' min='1'></td><td><input type='number' name='input2' maxlength='11' min='1'></td><td><select name='input3'><option value='planowane'>Planowane</option><option value='obejrzane'>Obejrzane</option></select></td><td><input type='number' name='input4' min='0' max='1' step='1'></td>";
+                        break;
+                    case 'uzytkownicy':
+                        echo "<td>Login</td><td>Hasło</td><td>Rola</td><td>Email</td></tr>";
+                        echo "<form method='post'><tr><td><input type='text' name='input1' maxlength='255'></td><td><input type='text' name='input2' maxlength='255'></td><td><select name='input3'><option value='uzytkownik'>Użytkownik</option><option value='edytor'>Edytor</option><option value='moderator'>Moderator</option><option value='admin'>Admin</option></select></td><td><input type='email' name='input4' maxlength='100'></td>";
+                        break;
+                    default:
+                        echo "<script>document.getElementById('input_table').style.display='none'</script>";
+                        break;
+                }
+
+            ?>
+            <tr>
+                <td colspan="9"><input type='submit' name="submit" style="color:white;float:right;" value="Wyślij" class="outline_txt"></td></form>
+            </tr>
+            <?php
+    if(isset($_POST['submit'])){
+        switch($tab){
+            case 'statusy_filmow':
+            case 'uzytkownicy'://4 do wstawienia
+                if(isset($_POST['input1']) && isset($_POST['input2']) && isset($_POST['input3']) && isset($_POST['input4'])){
+                    mysqli_query($con,"INSERT INTO ".$tab." VALUES (NULL,'".$_POST['input1']."','".$_POST['input2']."','".$_POST['input3']."','".$_POST['input4']."');");
+                } break;
+            case 'oceny'://5 do wstawienia    
+                if(isset($_POST['input1']) && isset($_POST['input2']) && isset($_POST['input3']) && isset($_POST['input4']) && isset($_POST['input5'])){
+                    mysqli_query($con,"INSERT INTO ".$tab." VALUES (NULL,'".$_POST['input1']."','".$_POST['input2']."','".$_POST['input3']."','".$_POST['input4']."','".$_POST['input5']."');");
+                } break;
+        }
+    }
+    ?>
+    <table class="display_table">
+        <?php
+                    if($tab=='oceny_uzytkownikow'){
+                    $qry=mysqli_query($con, "SELECT * FROM ".$tab);
+                } else {
+                    $qry=mysqli_query($con, "SELECT * FROM ".$tab." ORDER BY ID");
+                }
                     $cols=mysqli_field_count($con);                //Pobieranie ilość kolumn z ostatniego zapytania
                     $qry2=mysqli_query($con, "DESCRIBE ".$tab);    //Pobranie nazw nagłówków
+                    $j=1;
                     if (mysqli_num_rows($qry)>0){                  //Sprawdzenie czy jest coś do wyświetlenia
                         echo "<tr>";                               
                         while($names=mysqli_fetch_array($qry2)){   
@@ -120,12 +182,15 @@ $con=mysqli_connect("localhost","root","","movielock");
                                     echo "<td>".$row[$i]."</td>";//Jeżeli nie to jako normalna komórka
                                 }
                             }
-                        echo"</tr>";
+                        if ($mode=='table'){
+                        echo"<td><a style='float:unset;' href='edycja.php?tab=".$tab."&rekord=".$row[0]."'>Edytuj</a><br><a style='float:unset;' href='usun.php?tab=".$tab."&rekord=".$row[0]."'>Usuń</a></td></tr>";
+                        }
+                        $j++;
                         }
                     } else {
-                        echo "<td style='padding:15px;'>Brak informacji do wyświetlenia...</td>";//Jeżeli nie ma wartości to wypisuje brak informacji
+                        echo "<td style='padding:15px;'>Brak informacji do wyświetlenia...</td>";
                     }
-                    
+
                     ?>
     <footer>
         <section>
