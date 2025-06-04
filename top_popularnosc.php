@@ -26,6 +26,7 @@ session_start();
                     }
                 ?>" class="odstep">Moje konto</a>
                 <a href="logout.php">Wyloguj</a>
+                <a href="koszyk.php" class="odstep">Koszyk</a>
             <?php else: ?>
                 <a href="login.php" class="odstep">Logowanie</a>
             <?php endif; ?>

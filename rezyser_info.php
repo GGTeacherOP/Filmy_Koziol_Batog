@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -37,7 +40,20 @@
         <img alt="logo" src="logo.png">
         <section>
             <h1>Movielock</h1>
-            <a href="login.php" class="odstep">Logowanie</a>
+            <?php if(isset($_SESSION['user_id'])): ?>
+                <a href="<?php 
+                    switch($_SESSION['user_role']) {
+                        case 'admin': echo 'admin_panel.php'; break;
+                        case 'moderator': echo 'moderator_panel.php'; break;
+                        case 'edytor': echo 'edytor_panel.php'; break;
+                        default: echo 'user_profile.php';
+                    }
+                ?>" class="odstep">Moje konto</a>
+                <a href="logout.php">Wyloguj</a>
+                <a href="koszyk.php" class="odstep">Koszyk</a>
+            <?php else: ?>
+                <a href="login.php" class="odstep">Logowanie</a>
+            <?php endif; ?>
             <a href="top_popularnosc.php">Najpopularniejsze</a>
             <a href="top_ocena.php">Najlepsze</a>
             <a href="index.php">Strona Główna</a>
