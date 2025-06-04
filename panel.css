@@ -41,3 +41,6 @@ td, th {
 a{
     text-decoration: underline;
 }
+input[type="number"]{
+    width:50px;
+}
